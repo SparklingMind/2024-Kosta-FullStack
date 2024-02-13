@@ -80,14 +80,8 @@ public class ElectronicsServiceImpl implements ElectronicsService {
 
 	@Override
 	public void delete(int modelNo) throws SearchNotFoundException {
-		for (Electronics e : list) {
-			if (e.getModelNo() == modelNo) {
-				// 찾았다.
-				list.remove(e);
-				return;
-			}
-		}
-		throw new SearchNotFoundException(modelNo + "은 없는 모델 번호로 검색할 수 없습니다.");
+		Electronics e = this.searchByModelNo(modelNo);
+		list.remove(e);
 	}
 
 	@Override
