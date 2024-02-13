@@ -4,7 +4,11 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-
+/**
+ * 키보드입력을  exit단어를 만날때 까지 입력 받아서 모니터에 출력하고
+   exit단어를 입력하면 종료한다.
+   입력된 내용을 파일에 저장한다.
+ */
 public class KeyboardInputToFile {
 	private static final String OUTPUT_FILE_NAME = "src/ex0213/assignment/output.txt";
 

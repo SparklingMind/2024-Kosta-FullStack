@@ -1,7 +1,22 @@
 package ex0213.assignment;
 import java.io.*;
 import java.util.Scanner;
+/**
+ * 시작하면
+   1. 프로필 저장 	 2. 프로필 불러오기 	3. 종료  
+   메뉴 출력한다.
 
+   1을 클릭하면
+     이름, 몸무게, 비밀번호를 입력받는다.
+      입력이 완로되면 이름.txt파일을 만들고 
+       그안에 몸무게:비밀번호 형태로 저장한다.   
+
+
+   2을 클릭하면
+    이름>
+   입력받고
+     이름에 해당하는 파일 찾아서 홍길동의 몸무게는 60kg 이고 비번은 1234 입니다.  출력한다. 
+ */
 public class UserProfileManagement {
 	private static final String DIRECTORY_PATH = "src/ex0213/assignment/";
     private static Scanner scanner = new Scanner(System.in);
