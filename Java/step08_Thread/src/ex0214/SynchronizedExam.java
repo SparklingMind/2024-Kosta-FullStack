@@ -32,7 +32,7 @@ class Bank{
 	public synchronized void balanceChange(String name , boolean state) {
 		if(state) {
 			if(balance==0) {
-			//synchronized (this) {//괄호안에는 공유객체
+			//synchronized (this) {//괄호 안에는 공유객체
 				System.out.print(name + "===> 현재 잔액 확인 : " + balance+" , ") ;
 				balance++;
 				System.out.println(name + "===> 증가 한 후 잔액 확인 : " + balance) ;
