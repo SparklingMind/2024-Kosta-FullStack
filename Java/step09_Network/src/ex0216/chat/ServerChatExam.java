@@ -25,6 +25,7 @@ public class ServerChatExam {
     }
 
     public static void main(String[] args) {
+    	
         new ServerChatExam();
     }
 
