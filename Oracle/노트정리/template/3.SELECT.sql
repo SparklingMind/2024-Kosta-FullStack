@@ -23,36 +23,82 @@ SELECT * FROM EMP; --사원테이블
 SELECT * FROM DEPT;--부서정보테이블
 
 --1) EMP테이블에서 원하는 컬럼(별칭)
+SELECT EMPNO AS "사원 번호", ENAME AS 이름, JOB AS 직무, SAL
+FROM EMP;
 
 
 --2) 중복행 제거하기 - DISTINCT
  --EX) 우리회사에 어떤 JOB있는지 JOB의 종류를 알고싶다!!!
-
+SELECT DISTINCT JOB
+FROM EMP;
 
  
 --3) 조건 만들기 
  -- 급여가 3000이상인 사원 검색
-
+ SELECT EMPNO, ENAME, JOB, SAL
+ FROM EMP
+ WHERE SAL >=3000;
+ 
  
  --4) 정렬
  -- 급여가 2000이상인 사원을 검색하고 급여를 기준으로 정렬
-
+SELECT *
+FROM EMP
+WHERE SAL>=2000
+ORDER BY SAL DESC;
 
 
  --JOB을 기준으로 내림차순정렬하고 JOB이 같으면 급여를 기준으로 정렬
+SELECT EMPNO, ENAME, JOB, SAL
+FROM EMP
+ORDER BY JOB DESC, SAL ASC; --ASC(오름차)는 생략가능
+
+--조건 + 정렬
+SELECT EMPNO, ENAME, JOB 직무, SAL 급여
+FROM EMP
+WHERE SAL >= 2000
+ORDER BY JOB DESC, SAL ASC;
+
+--별칭을 정렬 대상으로 사용할 수 있을까? - 가능
+SELECT EMPNO, ENAME, JOB 직무, SAL 급여
+FROM EMP
+WHERE SAL >= 2000
+ORDER BY 직무 DESC, 급여 ASC;
+
+--별칭을 조건 대상으로 사용할 수 있을까? - 불가능. 실행순서가 WHERE 다음에 SELECT절이므로 별칭을 미리 알 수 없다.
+SELECT EMPNO, ENAME, JOB 직무, SAL 급여
+FROM EMP
+WHERE 급여 >= 2000
+ORDER BY JOB DESC, SAL ASC;
 
 
+--정렬 대상을 컬럼의 INDEX로 가능하다.
+SELECT EMPNO, ENAME, JOB 직무, SAL 급여
+FROM EMP
+WHERE SAL >= 2000
+ORDER BY 3 DESC, 1 ASC;
 
---칼럼들끼리 연산이 가능하다
+
+--칼럼들끼리 연산이 가능하다.
+--급여와 커미션을 더하고 12를 곱해서 연봉을 구하는 컬럼을 만들어보자.
+-- NULL값을 다른 값으로 변경해서 연산 할 수 있다  -->  NVL(칼럼명, 변경값)
+SELECT EMPNO, ENAME, SAL, COMM, SAL+NVL(COMM,0) * 12 AS 연봉
+FROM EMP;
 
 
 
 -- NULL값을 다른 값으로 변경해서 연산 할 수 있다  -->  NVL(칼럼명, 변경값
+SELECT COMM, NVL(COMM,20)
+FROM EMP;
 
   
---님 년봉은 ~입니다. 출력 ---  문자열 연결 || 이용
+--님 연봉은 ~입니다. 출력 ---  문자열 연결 || 이용
+SELECT ENAME || '님 연봉은' || (SAL+NVL(COMM,0) * 12) || '입니다.' AS MESSAGE
+FROM EMP;
 
-
+--|| 연산자 대신에 CONCAT() 함수 이용해보자
+SELECT CONCAT(CONCAT(ENAME, '님 연봉은') , CONCAT( (SAL+NVL(COMM,0) * 12), '입니다.')) AS MESSAGE
+FROM EMP;
 
   
 -----------------------------------------------------------------------------------
@@ -85,8 +131,8 @@ SELECT * FROM DEPT;--부서정보테이블
     - NOT : 위의 모든 연산자들 앞에 NOT을 붙히면 반대 개념.
         
 */
---EX) 산술연산자 : EMP에서 년봉계산 = (SAL + COMM) *12  해서 년봉 컬럼 
- 
+--EX) 산술연산자 : EMP에서 연봉계산 = (SAL + COMM) *12  해서 연봉 컬럼 
+
  
  -- * NVL(값, 대치값)  : NULL을 찾아 대치값으로 변경한다. 
 
@@ -99,35 +145,91 @@ SELECT * FROM DEPT;--부서정보테이블
 
 
 --EX) SAL 가 2000 ~ 4000사원 검색(AND, BETWEEN AND )
-
+ SELECT *
+ FROM EMP
+ WHERE SAL >= 2000 AND SAL <=4000
+ ORDER BY SAL;
+ 
+ SELECT *
+ FROM EMP
+ WHERE SAL BETWEEN 2000 AND 4000
+ ORDER BY SAL;
  
 
 --EX) SAL 가 2000 ~ 4000사원아닌 레코드 검색 -  NOT
-
+--EX) SAL 가 2000 ~ 4000사원 검색(AND, BETWEEN AND )
+ SELECT *
+ FROM EMP
+ WHERE NOT (SAL >= 2000 AND SAL <=4000)
+ ORDER BY SAL;
+ 
+ SELECT *
+ FROM EMP
+ WHERE SAL NOT BETWEEN 2000 AND 4000
+ ORDER BY SAL;
+ 
 
 
 
 --EX) EMPNO 가 7566, 7782,7844인 사원검색 ( OR, IN)
 
+SELECT *
+FROM EMP
+WHERE EMPNO = 7566 OR EMPNO = 7782 OR EMPNO = 7844
+ORDER BY SAL;
 
+SELECT *
+FROM EMP
+WHERE EMPNO IN (7566,7782,7844) 
+ORDER BY SAL;
 
 --EX) EMPNO 가 7566, 7782,7844인 사원이 아닌 검색 ( NOT)
 
+SELECT *
+FROM EMP
+WHERE NOT (EMPNO = 7566 OR EMPNO = 7782 OR EMPNO = 7844)
+ORDER BY SAL;
 
+SELECT *
+FROM EMP
+WHERE EMPNO NOT IN (7566,7782,7844) 
+ORDER BY SAL;
 ---------------------------------------------------------------------------
---1) JOB에 'A' 문자로시작하는 레코드 검색
-
+--1) JOB에 'A' 문자로시작하는 레코드 검색(와일드카드)
+SELECT * 
+FROM EMP 
+WHERE JOB LIKE 'A%';
 
 --2) JOB에 끝 끌자가 'N'으로 끝나는 레코드 검색
-
+SELECT *
+FROM EMP
+WHERE JOB LIKE '%N';
 
 --3) ENAME이 4글자인 레코드 검색
-
+SELECT *
+FROM EMP
+WHERE ENAME LIKE '____';
 
 --4) ENAME에 A글자가 포함된 레코드 검색
-
+--%가 포함된 단어 자체를 검색하고 싶다면, 이스케이프 키워드인 ESCAPE 사용
+SELECT *
+FROM EMP
+WHERE ENAME LIKE '%A%';
 
 --5) ENAME전체 글자가 5글자이고 두번째 글자가 m이면서끝글자가 h인 레코드 검색
+SELECT *
+FROM EMP
+WHERE ENAME LIKE '_M__H';
+
+--6) UPPER과 LOWER 함수
+SELECT 'HyeNa', upper('HyeNa'), lower('HyeNa')
+from dual; --가상테이블
+
+-- 문자열에서 % 단어를 포함한 레코드 검색하고 싶을 때
+SELECT * FROM COPY_EMP;
+INSERT INTO COPY_EMP(EMPNO, ENAME, JOB) VALUES(9000,'YU%NA','GARDNER');
+
+SELECT * FROM COPY_EMP WHERE ENAME LIKE '%#%%' ESCAPE '#';
 
 -------------------------------------------------------------------------------------------------
 
@@ -139,15 +241,22 @@ SELECT * FROM DEPT;--부서정보테이블
 */
 
 -- COMM이 NULL인 레코드 검색
+SELECT * FROM EMP WHERE COMM = NULL; --X. 이렇게 쓰면 안 됨.
+SELECT * FROM EMP WHERE COMM IS NULL;
+SELECT * FROM EMP WHERE COMM IS NOT NULL;
 
-
+COMMIT;
 --COPY_EMP 테이블에서 COMM이 NULL레코드를 COMM의 값을 100으로 변경
+UPDATE COPY_EMP
+SET COMM = 100
+WHERE COMM IS NULL;
 
+SELECT * FROM COPY_EMP;
  
  
 -- NULL이 있는 컬럼을 대상으로 정렬을 해보자
 SELECT * FROM EMP ORDER BY COMM; -- 오름차순일때는 NULL은 마지막에 조회된다
-SELECT * FROM EMP ORDER BY COMM DESC; -- 내름차순일때는 NULL은 처음에 조회된다 
+SELECT * FROM EMP ORDER BY COMM DESC; -- 내림차순일때는 NULL은 처음에 조회된다 
 SELECT * FROM EMP ORDER BY COMM ASC NULLS FIRST; --NULL을 우선적으로 출력
 
 

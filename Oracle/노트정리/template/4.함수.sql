@@ -1,4 +1,4 @@
-  문자열 함수
+  /*문자열 함수
     - upper(문자열) => 모두 대문자
     - lower(문자열) => 모두 소문자
     - initcap(문자열)=> 단어의 첫 글자 대문자로 표현
@@ -48,17 +48,20 @@ SELECT JOB, SUBSTR(JOB, 0, 3), SUBSTR(JOB, -2, 3)
 
 
 
--- INSTR(문자열, 문자, 시작, 몇번째 출현): 문자열에서 두번째인수문자가 몇 번째에 있는 지 찾아주는 함수
+-- INSTR(문자열, 문자, 시작, 몇번째 출현): 문자열에서 인수문자가 몇 번째에 있는 지 찾아주는 함수
 SELECT 'ABCDE ABCDE ABCDE ABCDE'
        ,INSTR('ABCDE ABCDE ABCDE ABCDE', 'C')
        ,INSTR('ABCDE ABCDE ABCDE ABCDE','C', 5)
-       ,INSTR('ABCDE ABCDE ABCDE ABCDE','C', 5, 2)  --두번째에 오는 
+       ,INSTR('ABCDE ABCDE ABCDE ABCDE','C', 5, 2)  --5번 인덱스부터 두번 째에 오는 인덱스를 찾음.
   FROM DUAL;
   
   
-  SELECT * FROM teacher;
-  
+
 -- ex) 이메일 주소에 @전까지 출력, @이후부터 출력 
+SELECT 이메일, 
+SUBSTR(이메일, 1, INSTR(이메일,'@')-1) AS 앞,
+SUBSTR(이메일, INSTR(이메일,'@')+1) AS 후
+FROM TEACHER;
 
   
  /*
@@ -101,19 +104,34 @@ SELECT SAL, MOD(SAL, 2)
    - last_day(날짜) => 날짜 달의 마지막 날짜를 구함
 */
 
-SELECT EMPNO, HIREDATE, SYSDATE-HIREDATE, HIREDATE+5, TO_CHAR(HIREDATE + 5/24, 'YYYY-MM-DD HH:MI:SS')
-  FROM EMP;
-  
+SELECT EMPNO, HIREDATE, SYSDATE-HIREDATE, HIREDATE+5,
+TO_CHAR(HIREDATE, 'YYYY-MM-DD HH:MI:SS')
+FROM EMP;
 
-SELECT SYSDATE, EXTRACT(DAY FROM SYSDATE), EXTRACT(MONTH FROM SYSDATE), EXTRACT(YEAR FROM SYSDATE)
+SELECT
+TO_CHAR(SYSDATE, 'YYYY-MM-DD HH:MI:SS'),
+TO_CHAR(SYSDATE + 4, 'YYYY-MM-DD HH24:MI:SS'),
+TO_CHAR(SYSDATE + 1/24, 'YYYY-MM-DD HH24:MI:SS')
+FROM DUAL;
+
+--EXTRACT
+SELECT SYSDATE, 
+EXTRACT(DAY FROM SYSDATE), 
+EXTRACT(MONTH FROM SYSDATE), 
+EXTRACT(YEAR FROM SYSDATE)
  FROM DUAL;
   
   
-SELECT SYSDATE, TO_CHAR(SYSDATE, 'DD'), TO_CHAR(SYSDATE, 'MM'), TO_CHAR(SYSDATE, 'YYYY')
+SELECT SYSDATE, 
+TO_CHAR(SYSDATE, 'DD'), 
+TO_CHAR(SYSDATE, 'MM'), 
+TO_CHAR(SYSDATE, 'YYYY')
   FROM DUAL;
 
 -- 입사일 -> 2002년 10월 2일 
-SELECT HIREDATE, TO_CHAR(HIREDATE, 'YYYY') || '년', CONCAT(TO_CHAR(HIREDATE, 'MM'), '월')
+SELECT HIREDATE, 
+TO_CHAR(HIREDATE, 'YYYY') || '년', 
+CONCAT(TO_CHAR(HIREDATE, 'MM'), '월')
   FROM EMP;
 
 
@@ -158,18 +176,25 @@ SELECT TO_DATE('2023-3-2') + 100
 
 
 ------------------------------------------------
- --NVL2함수  ex) MGR이 NULL이 아니면 두번째 인수를, NULL이면 세번째인수 리턴
- 
+
+/* NULL에 관련된 함수 : NVL(), NVL2().NULLIF(), COALESCE()
+    1)NVL(대상, 변경값) : 대상에서 NULL이 있으면 변경값으로 대치
+    2)NVL2(대상, NULL이 아닌 경우, NULL인 경우)
+        ex) MGR이 NULL이 아니면 두번째 인수를, NULL이면 세번째인수 리턴
+    3)NULLIF는 첫 번째 인수와 두 번째 인수가 같으면 NULL, 아니면 첫 번째 인수의 값
+    4)COALESSCE
+*/
 SELECT EMPNO, ENAME, MGR  ,NVL2(MGR, MGR||'는 관리자','최고관리자')
   FROM EMP;
 
- 
 SELECT EMPNO, JOB, NULLIF(JOB, 'MANAGER')  FROM EMP;
 
 
---COALESCE함수 ; 가장 먼저 NULL이 아닌 것을 반환
+--COALESCE함수 : 가장 먼저 NULL이 아닌 것을 반환
 SELECT ENAME, COMM, SAL, COALESCE(COMM, SAL, 50) RESULT
   FROM EMP;
+  
+SELECT COALESCE(NULL,NULL,200,300) FROM DUAL;
 
 -------------------------------------------------------------------------
  /*
@@ -185,14 +210,47 @@ SELECT ENAME, COMM, SAL, COALESCE(COMM, SAL, 50) RESULT
         else 문장
      end
  */
+ --REPORT 테이블 생성
+ CREATE TABLE REPORT(
+ NAME VARCHAR2(20) CONSTRAINT REPORT_NAME_PK PRIMARY KEY,
+ BAN CHAR(1),
+ KOR NUMBER(3) CHECK(KOR BETWEEN 0 AND 100),
+ ENG NUMBER(3) CHECK(ENG BETWEEN 0 AND 100),
+ MATH NUMBER(3) CHECK(MATH BETWEEN 0 AND 100)
+);
 
+SELECT * FROM REPORT;
+
+--샘플레코드
+INSERT INTO REPORT VALUES('희정', 1 , 80, 70,90);
+INSERT INTO REPORT VALUES('효리', 1 , 90, 50,90);
+
+INSERT INTO REPORT VALUES('나영', 2 , 100, 65,85);
+INSERT INTO REPORT VALUES('재석', 2 , 80, 70, 95);
+INSERT INTO REPORT VALUES('희선', 2 , 85, 45,80);
+
+INSERT INTO REPORT VALUES('승기', 3 , 50, 70,70);
+INSERT INTO REPORT VALUES('중기', 3 , 90, 75,80);
+INSERT INTO REPORT VALUES('혜교', 3 , 70, 90,95);
+INSERT INTO REPORT VALUES('미나', 3 , NULL, 80,80);
+
+SELECT * FROM REPORT;
   --EX) 성적테이블에서 국어점수가 80이상이면 합격, 아니면 불합격  합격여부 필드를 만든다. - CASE END 로사용
-
+    
+SELECT NAME, BAN, KOR, 
+CASE 
+    WHEN KOR >= 80 THEN '합격'
+    ELSE '불합격'
+END AS 합격여부
+FROM REPORT;
 
   /*EX)성적테이블에서 BAN이 1이면 'MAS과정', 2이면 'IOT과정', 
   3이면 'DESIGN과정' 이외는 'FULL STACK과정' 라는 과정명 필드를
  만든다.*/
-
+ 
+SELECT BAN, NAME, KOR,  
+DECODE(BAN,1,'MSA과정',2,'IOT과정',3,'디자인과정','FULL-STACK과정') AS 과정명
+FROM REPORT;
 
 /*
 EX) EMP테이블에서 DEPNO가 10 이면 관리부, 20이면 총무부, 30이면 영업부 
@@ -200,7 +258,10 @@ EX) EMP테이블에서 DEPNO가 10 이면 관리부, 20이면 총무부, 30이면 영업부
      (DECODE, CASE END)
      DECODE는 값이 정확하게 일치해야한다
 */
+SELECT * FROM EMP;
 
+SELECT EMPNO,ENAME,DEPTNO,DECODE(DEPTNO,10,'관리부',20,'총무부',30,'영업부','기타부') AS 부서명
+FROM EMP ORDER BY 부서명;
 
 /*
 ex)job이 manager인 경우 sal*0.1, ANALYST 인경우는   sal *0.2
@@ -208,16 +269,31 @@ ex)job이 manager인 경우 sal*0.1, ANALYST 인경우는   sal *0.2
       (case end, decode 다 해본다) 
 */
 
+SELECT EMPNO,ENAME,JOB,SAL,
+DECODE(LOWER(JOB),LOWER('MANAGER'),SAL*0.1,LOWER('ANALYST'),SAL*0.2,LOWER('SALESMAN'),SAL*0.3, 0) AS 성과급
+FROM EMP;
 
-
-
-
+SELECT EMPNO,ENAME,JOB,SAL,
+CASE LOWER(JOB)
+    WHEN LOWER('MANAGER') THEN SAL*0.1
+    WHEN LOWER('ANALYST') THEN SAL*0.2
+    WHEN LOWER('SALESMAN') THEN SAL*0.3
+    ELSE 0
+END AS 성과급
+FROM EMP;
 /*
 ex) sal이 2000이하이면 '저소득층'
       sal이 2001 ~ 4000사이면 '중산층'
       sal이 4001 이상이면 '고소득층'  구하여 등급 별칭 해준다.
       (case end) 
 */
+SELECT EMPNO,ENAME,SAL,
+CASE
+    WHEN SAL <= 2000 THEN '저소득층'
+    WHEN SAL BETWEEN 2000 AND 4000 THEN '중산층'
+    ELSE '고소득층'-- 4001이상은 모두 고소득층
+END AS 소득수준
+FROM EMP;
 
 
 
