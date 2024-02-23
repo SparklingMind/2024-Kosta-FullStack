@@ -138,32 +138,83 @@ SELECT * FROM TEST3;
   
   
  -- 부서번호가 30인 사원들이 급여중에서 가장 많이 받는 사원보다 더 많이 받는 사원정보를 검색하고 싶다. 
+--1) JOB에 'A'문자열이 들어간 사원의 부서와 같은 곳에서 근무하는
+SELECT DISTINCT DEPTNO FROM EMP WHERE JOB LIKE '%A%';
 
+SELECT SAL FROM EMP WHERE DEPTNO=30;
+
+--부서번호가 30인 사원들 중에서 가장 많이 받는 사원보다 더 많이 받는 사원을 검색하기.
+SELECT * FROM EMP WHERE SAL> ALL (SELECT SAL FROM EMP WHERE DEPTNO=30);
+
+--집계함수 MAX를 이용해 같은 쿼리문 만들기
+SELECT * FROM EMP WHERE SAL > (SELECT MAX(SAL) FROM EMP WHERE DEPTNO=30);
+
+--부서번호가 30인 사원들 중에서 가장 적게 받는 사원보다 더 적게 받는 사원을 검색하기.
+SELECT * FROM EMP WHERE SAL < (SELECT MIN(SAL) FROM EMP WHERE DEPTNO=30); --MIN 사용
+SELECT * FROM EMP WHERE SAL < ALL(SELECT SAL FROM EMP WHERE DEPTNO=30); -- ALL 사용
+
+--부서번호가 30인 사원들 중에서 가장 적게 받는 사원보다 더 많이 받는 사원을 검색하기.
+SELECT * FROM EMP WHERE SAL > (SELECT MIN(SAL) FROM EMP WHERE DEPTNO=30); --MIN 사용
+SELECT * FROM EMP WHERE SAL > ANY(SELECT SAL FROM EMP WHERE DEPTNO=30); --ANY 사용
+
+--테이블 구조만 복사
+CREATE TABLE SUB_EMP
+AS SELECT * FROM EMP WHERE 1=0; --레코드 하나도 없게
+
+SELECT * FROM SUB_EMP;
 
 -- SUBQUERY를 INSERT
+INSERT INTO SUB_EMP (SELECT * FROM EMP WHERE DEPTNO=20); --DEPTNO가 20인 행들을 삽입
 
 
 --특정한 칼럼만 다른테이블로부터 가져와서 INSERT
+INSERT INTO SUB_EMP(EMPNO, ENAME, JOB, SAL)(SELECT EMPNO, ENAME, JOB, SAL FROM EMP WHERE DEPTNO=10); 
+
 
 
 --SUBQUERY를 UPDATE
 --EX) EMP테이블에서 EMPNO 7900인 사원의 JOB, MGR, DEPTNO로 SUB_EMP테이블의 7566의 사원의 정보로 수정해보자.
+UPDATE SUB_EMP
+SET JOB=(SELECT JOB FROM EMP WHERE EMPNO=7900), 
+MGR=(SELECT MGR FROM EMP WHERE EMPNO=7900), 
+DEPTNO=(SELECT DEPTNO FROM EMP WHERE EMPNO=7900)
+WHERE EMPNO=7566;
 
+UPDATE SUB_EMP
+SET (JOB,MGR,DEPTNO) = (SELECT JOB,MGR,DEPTNO FROM EMP WHERE EMPNO=7900) --SELECT 뒤의 칼럼 순으로 SET. 
+WHERE EMPNO=7566;
 
 --SUBQUERY를 DELETE
   --EX) EMP테이블이 평균 급여를 조건으로 사용해서 평균급여보다 많이 받는 사원들을 삭제한다. 
-
- 
+DELETE FROM SUB_EMP WHERE SAL> (SELECT AVG(SAL) FROM EMP);
+SELECT * FROM SUB_EMP;
 
 --------------------------------------------------------------
 /*
-  SUBQUERY 종류중의 하나인 인라인뷰
+  SUBQUERY 종류 중의 하나인 인라인뷰
    : FROM절 뒤에 서브쿼리가 오는 것.
 */
 
--- 급여를 기준으로 정렬해서 ROWNUM을 함께 출력하고 싶다.
+-- 급여를 기준으로 정렬해서 ROWNUM(행마다 번호를 출력)을 함께 출력하고 싶다.
+SELECT E.*, ROWNUM FROM EMP E;
 
+SELECT ROWNUM, EMPNO, ENAME, JOB, SAL FROM EMP --쿼리문의 순서 때문에 ROWNUM이 먼저 삽입되어서 SAL순으로 번호가 매겨지지 않는다.
+ORDER BY SAL;
 
+--인라인 뷰 이용
+SELECT ROWNUM, EMPNO, ENAME, JOB, SAL
+FROM (SELECT * FROM EMP ORDER BY SAL);  --정렬을 한 뒤에, ROWNUM을 붙여줄 수 있다. 
+
+--ROWNUM을 대상으로 조건을 만들어보자.
+--1. ROWNUM이 3보다 작은 레코드 검색
+SELECT ROWNUM 번호, EMPNO, ENAME, JOB, SAL
+FROM (SELECT * FROM EMP ORDER BY SAL DESC)
+WHERE ROWNUM < 3;
+
+--2. ROWNUM이 3보다 큰 레코드 검색
+SELECT ROWNUM 번호, EMPNO, ENAME, JOB, SAL
+FROM (SELECT * FROM EMP ORDER BY SAL DESC)
+WHERE ROWNUM > 3;
 
 
 
