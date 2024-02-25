@@ -1,15 +1,3 @@
---system계정으로 접속한다.  cmd창에서 conn system/admin
-
---계정생성
-create user c##exam identified by 1234;
-
---권한설정
- grant connect, resource , dba to c##exam;
- 
- --접속 등록한다.
- 
- --새로 만든 계정으로 접속한다. 
-
 --과목테이블
 create table subject(
 	수강코드 varchar2(5) constraint 수강_pk primary key,

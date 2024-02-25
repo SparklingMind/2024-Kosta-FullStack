@@ -1,4 +1,4 @@
-
+/*
 --각자 계정접속한다.
 
 --emp 테이블 생성
@@ -54,42 +54,122 @@ INSERT INTO subdept VALUES(400,'영업부');
 
 SELECT * FROM subEMP;
 SELECT *FROM subdept;
+*/
 
 ------------------------------------------------------
 
 --ex1) 이종길 사원의 부서명(dname)을 검색하시오.
+SELECT E.EMP_NAME,D.DNAME
+FROM SUBEMP E
+JOIN SUBDEPT D ON E.DEPT_ID = D.DEPT_ID
+WHERE E.EMP_NAME = '이종길';
 
 --ex2) dept_id가 100인 사원급여의 최대값보다 많이 받는 사원을 검색하시오.
+SELECT *
+FROM SUBEMP
+WHERE SAL > (
+    SELECT MAX(SAL)
+    FROM SUBEMP
+    WHERE DEPT_ID = 100
+);
 
 --ex3)급여를 3000이상 받는 사원이 소속된 부서와 
  --  동일한 부서에서 근무하는 사원들의 정보
+ 
+SELECT *
+FROM SUBEMP
+WHERE DEPT_ID IN (
+    SELECT DEPT_ID
+    FROM SUBEMP
+    WHERE SAL >= 3000
+);
 
-  --ex4) 부서번호가 300인 사원들중에서 급여를 가장 많이 받는 사원보다
+--ex4) 부서번호가 300인 사원들중에서 급여를 가장 많이 받는 사원보다
       더 많은 급여를 받는 사람의 정보를 검색.
-
+SELECT *
+FROM SUBEMP
+WHERE SAL > (
+    SELECT MAX(SAL)
+    FROM SUBEMP
+    WHERE DEPT_ID = 300
+);
    
 -- ex5) 부서번호가 300인 사원들중에서 급여를 가장 적게 받는 사원보다
 --     더 많은 급여를 받는 사람의 정보를 검색
-   
+SELECT *
+FROM SUBEMP
+WHERE SAL > (
+    SELECT MIN(SAL)
+    FROM SUBEMP
+    WHERE DEPT_ID = 300
+);
 --ex6)정동길의 급여와 동일 하거나 더 많이 받는 사원의 정보검색
+SELECT *
+FROM SUBEMP
+WHERE SAL >= (
+    SELECT SAL
+    FROM SUBEMP
+    WHERE EMP_NAME = '정동길'
+);
  
 --ex7)직급이 사무직인 사원의 부서번호와 부서명 출력
+SELECT SUBEMP.JOB 직급, SUBEMP.DEPT_ID 부서번호, SUBDEPT.DNAME 부서명
+FROM SUBEMP
+JOIN SUBDEPT ON SUBEMP.DEPT_ID = SUBDEPT.DEPT_ID
+WHERE JOB = '사무직';
 
 --ex8) 부서가 경리부인 모든 사원의 정보출력
+SELECT E.*
+FROM SUBEMP E
+JOIN SUBDEPT D ON E.DEPT_ID = D.DEPT_ID
+WHERE D.DNAME = '경리부';
+
 --ex9)대표 에게 보고를 하는 모든 사원의 정보출력
+SELECT *
+FROM SUBEMP
+WHERE MGR_ID = (
+    SELECT EMP_ID
+    FROM SUBEMP
+    WHERE JOB = '대표'
+);
 
 --ex10) 이름에 '정'이 들어가면서 평균급여보다 높은 급여를 받는
 --     사원과 동일한 부서에서 근무하는 사원의 정보 검색.
 --      (단, 부서번호 null은 제외함)
-      
+SELECT *
+FROM SUBEMP
+WHERE DEPT_ID IN (
+    SELECT DEPT_ID
+    FROM SUBEMP
+    WHERE EMP_NAME LIKE '%정%' AND SAL > (
+        SELECT AVG(SAL)
+        FROM SUBEMP
+    )
+    AND DEPT_ID IS NOT NULL
+);
 --ex11) 각 부서의 어떤 평균 급여보다 급여를 많이 
 --      받는 사원의 정보를 검색
 
+SELECT *
+FROM SUBEMP E
+WHERE SAL > (
+    SELECT AVG(SAL)
+    FROM SUBEMP
+    WHERE DEPT_ID = E.DEPT_ID
+    GROUP BY DEPT_ID
+);
 
 
 --ex12)  모든 사무직 사원보다 급여가 적으면서 사무직이
 -- 아닌 모든 사원의 정보검색
-
+SELECT *
+FROM SUBEMP
+WHERE SAL < (
+    SELECT MIN(SAL)
+    FROM SUBEMP
+    WHERE JOB = '사무직'
+)
+AND NOT JOB = '사무직';
 
 
 
