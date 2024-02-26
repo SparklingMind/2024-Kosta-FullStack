@@ -36,11 +36,13 @@ DB 연동 순서
     
     boolean b = rs.next(); //커서를 한 행 앞으로 이동
    
+   List <Emp> list = new ArrayList<>();
     while(rs.next()){ //앞으로 커서가 이동한다면
         //열을 이동하면서 데이터 조회 - getType(컬럼명)
         int empno = rs.getInt("empno"); //1
         String ename = rs.getString("ename"); //2
         int sal = rs.getInt(3); //3
         Emp emp =  new Emp(empno, ename, sal);
+        list.add(emp);
     }
     
