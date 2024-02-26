@@ -41,7 +41,9 @@ JOIN SUGANG ON STUDENT.수강생번호 = SUGANG.수강생번호
 JOIN SUBJECT ON SUGANG.수강코드 = SUBJECT.수강코드
 WHERE SUBJECT.과목 = 'sql';
 
---8. 강사가 담당하는 과목과 그 과목이 어느 강의실에서 진행되며 총 수용 인언이 몇 명인지 검색
+--8. 강사가 담당하는 과목과 그 과목이 어느 강의실에서 진행되며 총 수용 인언이 몇 명인지 검색. 뷰로 작성해보자.
+CREATE OR REPLACE VIEW V_TEACHER
+AS
 SELECT TEACHER.강사번호, TEACHER.강사이름, SUGANGTB.수강코드, SUBJECT.과목, ROOM.강의실번호, ROOM.수용인원
 FROM TEACHER
 JOIN SUGANGTB ON TEACHER.강사번호 = SUGANGTB.강사번호

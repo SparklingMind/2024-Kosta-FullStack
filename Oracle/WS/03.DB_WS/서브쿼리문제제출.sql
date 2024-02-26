@@ -171,5 +171,12 @@ WHERE SAL < (
 )
 AND NOT JOB = '荤公流';
 
+SELECT e.emp_name, d.dname
+FROM subEMP e
+INNER JOIN subdept d ON e.dept_id = d.dept_id
+WHERE e.job = '荤公流';
 
-
+SELECT e.emp_name, d.dname
+FROM subEMP e
+INNER JOIN subdept d USING(dept_id)
+WHERE e.job = '荤公流';
