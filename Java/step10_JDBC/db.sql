@@ -1,4 +1,4 @@
-
+drop table bank;
 create table bank(
    account varchar2(10) primary key, --계좌번호
    balance number --잔액
