@@ -2,6 +2,7 @@ package db.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -40,7 +41,7 @@ public class DBmanager {
 				st.close();
 			if (con != null)
 				con.close();
-		} catch (SQLException e) {
+		} catch (SQLException e) {                                                         
 			e.printStackTrace();
 		}
 
@@ -59,5 +60,6 @@ public class DBmanager {
 		}
 
 	}
+
 }
 
