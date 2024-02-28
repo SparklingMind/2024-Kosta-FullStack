@@ -3,12 +3,13 @@ package db.vo;
 public class Teacher {
 	private int teacherNo;
 	private String teacherName;
+	
 	private String teacherJumin;
 	private String teacherPhone;
 	private String teacherAddr;
 	private String teacherEmail;
 	
-	private String sugangCode;
+	//private String sugangCode;
 	
 	//과목정보
 	private Subject subject;
@@ -28,7 +29,7 @@ public class Teacher {
 		this.teacherPhone = teacherPhone;
 		this.teacherAddr = teacherAddr;
 		this.teacherEmail = teacherEmail;
-		this.sugangCode = sugangCode;
+		//this.sugangCode = sugangCode;
 	}
 
 	public int getTeacherNo() {
@@ -79,13 +80,7 @@ public class Teacher {
 		this.teacherEmail = teacherEmail;
 	}
 
-	public String getSugangCode() {
-		return sugangCode;
-	}
-
-	public void setSugangCode(String sugangCode) {
-		this.sugangCode = sugangCode;
-	}
+	
 	
 	
 
@@ -120,8 +115,8 @@ public class Teacher {
 		builder.append(teacherAddr);
 		builder.append(", teacherEmail=");
 		builder.append(teacherEmail);
-		builder.append(", sugangCode=");
-		builder.append(sugangCode);
+		//builder.append(", sugangCode=");
+		//builder.append(sugangCode);
 		builder.append("]");
 		return builder.toString();
 	}

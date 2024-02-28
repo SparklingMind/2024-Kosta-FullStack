@@ -30,7 +30,7 @@ public interface StudentTeacherDAO {
 
 	/**
 	 * 8강사의 번호를 인수로 전달받아 뷰에서 그 강사번호에 해당하는 정보를 출력한다
-	 *   select * from v_teacherInfo  where 강사번호=?
+	 *   select * from v_teacher  where 강사번호=?
 	 * 
 	 * */
 	public Teacher getTeacherInfoByNo(int teacherNo);
