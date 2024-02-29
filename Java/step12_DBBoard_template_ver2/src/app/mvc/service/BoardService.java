@@ -13,7 +13,7 @@ public interface BoardService {
 	 * 모든 레코드 검색
 	 */
 	List<BoardDTO> boardSelectAll() throws SearchWrongException;
-
+	
 	/**
 	 * 제목에 특정문자열 포함한 레코드 검색
 	 */

@@ -36,7 +36,7 @@ public class BoardDAOImpl implements BoardDAO {
 			ps = con.prepareStatement(sql);
 		}catch (SQLException e) {
 			e.printStackTrace();
-			throw new SearchWrongException("DB에 문제가 있어 다시 진행해주요^^");
+			throw new SearchWrongException("DB에 문제가 있어 다시 진행해주세요^^");
 			
 		}finally {
 			DBManager.releaseConnection(con, ps, rs);
