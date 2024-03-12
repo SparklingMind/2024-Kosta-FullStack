@@ -25,7 +25,7 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch(menu) {
 			case 1 :
-				//MenuView.register(); // 가입
+				MenuView.register(); // 가입
 				break;
 			case 2 :
 				MenuView.login();// 로그인
@@ -90,6 +90,20 @@ public class MenuView {
 		
 	}
 	
+	
+	/**
+	 * 가입 메뉴
+	 */
+	public static void register() {
+		System.out.print("아이디 : ");
+        String userId = sc.nextLine();
+        
+        System.out.print("비번 : ");
+        String userPwd = sc.nextLine();
+        
+        CustomerController.register(userId, userPwd);
+		
+	}
 	/**
 	 * 로그인 메뉴
 	 * */

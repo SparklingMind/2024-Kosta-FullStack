@@ -21,4 +21,17 @@ public class CustomerController {
 			
 		}
 	}
+
+	/**
+	 * 가입
+	 */
+public static void register(String userId, String userPwd) {
+	try {
+		customerService.register(userId, userPwd);
+		MenuView.menu();
+	} catch (Exception e) {
+		FailView.errorMessage(e.getMessage());
+	}
+	
+}
 }

@@ -33,4 +33,20 @@ public class CustomerDAOImpl implements CustomerDAO {
 		return customer;
 	}
 
+	@Override
+	public void register(String userId, String userPwd) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = DBManager.getConnection();
+			ps = con.prepareStatement("insert into customer(user_id, user_pwd) values(?,?)");
+			ps.setString(1, userId);
+			ps.setString(2, userPwd);
+			ps.executeUpdate();
+		} finally {
+			DBManager.close(con, ps);
+		}
+		
+	}
+
 }

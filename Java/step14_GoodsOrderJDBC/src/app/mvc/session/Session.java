@@ -31,7 +31,7 @@ public class Session {
 		return attributes.get(name);
 	}
 	
-	//제거(장바구니를 비울대 사용한다)
+	//제거(장바구니를 비울 때 사용한다)
 	public void removeAttribute(String name) {//cart
 		attributes.remove(name);
 	}
@@ -62,12 +62,13 @@ public class Session {
 	}
 	
 	/**
-	 * 같은 객체라는 뜻은 hashCode가 같아야하고,
+	 * Set에서 같은 객체라는 뜻은 hashCode가 같아야하고,
 	 * equlas의 결과가 true여야한다.
 	 * 
 	 *  hash코드가 다르면 무조건 다른 객체
 	 *  hash코드가 같으면 같은 객체일수도, 다른 객체일수도 있다.
 	 * */
+	
 	@Override
 	public boolean equals(Object obj) {
 		Session other = (Session) obj;

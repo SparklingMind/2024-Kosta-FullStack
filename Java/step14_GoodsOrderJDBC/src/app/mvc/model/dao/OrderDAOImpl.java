@@ -13,62 +13,62 @@ import app.mvc.model.dto.OrderLine;
 import app.mvc.model.dto.Orders;
 import app.mvc.util.DBManager;
 
+//데이터베이스와의 상호작용을 담당하는 클래스. DAO(Data Access Object)는 데이터베이스의 데이터에 접근하기 위한 객체이다.
 public class OrderDAOImpl implements OrderDAO {
-	
-	GoodsDAO goodsDao = new GoodsDAOImpl();
-    /**
-     * 주문하기 
-     *        1) orders테이블에 insert
-     *        2) order_line테이블에 insert
-     *        3) goods의 재고량 감소(update)
-     * */
-	@Override
-	public int orderInsert(Orders order)throws SQLException {
-		 Connection con=null;
-		  PreparedStatement ps=null;
-		  String sql="INSERT INTO ORDERS(ORDER_ID, ORDER_DATE,USER_ID, ADDRESS, TOTAL_AMOUNT)" + 
-		  		"  VALUES(ORDER_ID_SEQ.NEXTVAL ,sysdate,?,?, ?)";
-		  int result=0;
-		 try {
-			
-		   con = DBManager.getConnection();
-		   con.setAutoCommit(false);
-		   
-		   ps = con.prepareStatement(sql);
-		   ps.setString(1, order.getUserId());
-		   ps.setString(2, order.getAddress());
-		   ps.setInt(3, this.getTotalAmount(order));//총구매금액구하는 메소드 호출
-		   
-		   result = ps.executeUpdate();
-		   if(result==0) {
-			   con.rollback();
-			   throw new SQLException("주문 실패...");
-		   }
-		   else {
-			   int re [] =this.orderLineInsert(con, order); //주문상세 등록하기 
-			   for(int i : re) {
-				   if(i != 1) {//
-					   con.rollback();
-					   throw new SQLException("주문 할수 없습니다....");
-				   }
-			   }
-			   
-			   //주문수량만큼 재고량 감소하기
-			   this.decrementStock(con, order.getOrderLineList());
-			   
-			   con.commit();
-		   }
-		   
-      }finally {
-    	  con.commit();
-      	DBManager.close(con, ps , null);
-      }
-		
-		return result;
-	}
+ 
+ // GoodsDAO의 인스턴스. GoodsDAO는 상품 데이터에 접근하기 위한 객체이다.
+ GoodsDAO goodsDao = new GoodsDAOImpl();
+ 
+ /**
+  * 주문을 데이터베이스에 저장하는 메소드.
+  * - Connection: 데이터베이스 연결을 관리하는 객체.
+  * - PreparedStatement: SQL 문을 표현하고 실행하는 객체. SQL 인젝션 공격을 방지할 수 있다.
+  * - SQLException: SQL 처리 중 발생하는 예외를 처리하는 클래스.
+  */
+ @Override
+ public int orderInsert(Orders order) throws SQLException {
+     Connection con = null;
+     PreparedStatement ps = null;
+     // SQL 문에서 ORDER_ID_SEQ.NEXTVAL은 주문 ID 시퀀스의 다음 값을 가져온다.
+     String sql = "INSERT INTO ORDERS(ORDER_ID, ORDER_DATE, USER_ID, ADDRESS, TOTAL_AMOUNT)" + 
+                 " VALUES(ORDER_ID_SEQ.NEXTVAL, sysdate, ?, ?, ?)";
+     int result = 0;
+     try {
+         con = DBManager.getConnection(); // DBManager를 통해 데이터베이스 연결을 가져온다.
+         con.setAutoCommit(false); // 트랜잭션 시작. 자동 커밋을 비활성화한다.
+         
+         ps = con.prepareStatement(sql); // SQL 문을 준비한다.
+         ps.setString(1, order.getUserId()); // 사용자 ID 설정
+         ps.setString(2, order.getAddress()); // 배송 주소 설정
+         ps.setInt(3, this.getTotalAmount(order)); // 총 구매 금액 계산
+         
+         result = ps.executeUpdate(); // SQL 문 실행
+         if (result == 0) {
+             con.rollback(); // 실패 시 롤백
+             throw new SQLException("주문 실패...");
+         } else {
+             // 주문 성공 시 추가 작업
+             int[] re = this.orderLineInsert(con, order); // 주문 상세 정보 등록
+             for (int i : re) {
+                 if (i != 1) {
+                     con.rollback();
+                     throw new SQLException("주문할 수 없습니다...");
+                 }
+             }
+             
+             // 재고 감소 처리
+             this.decrementStock(con, order.getOrderLineList()); 
+             con.commit(); // 모든 작업 성공 시 커밋
+         }
+     } finally {
+         DBManager.close(con, ps, null); // 리소스 해제
+     }
+     
+     return result;
+ }
 	
 	/**
-	 * 주문상세 등록하기 
+	 * 주문 상세 정보를 데이터베이스에 저장하는 메소드. 주문할 때마다 주문 상세 정보도 함께 저장된다.
 	 * */
 	public int[] orderLineInsert(Connection con  , Orders order) throws SQLException{
 		
@@ -86,8 +86,8 @@ public class OrderDAOImpl implements OrderDAO {
 			   ps.setInt(2, goods.getGoodsPrice());//가격
 			   ps.setInt(3, orderline.getQty());//총구매금액
 			   ps.setInt(4,  goods.getGoodsPrice()*orderline.getQty());//총구매금액
-			   ps.addBatch(); //일괄처리할 작업에 추가
-			   ps.clearParameters();
+			   ps.addBatch(); //addBatch는 일괄처리를 위한 메소드 -> 라인을 쌓아 놓고 한번에 처리
+			   ps.clearParameters(); //물음표에 바인딩된 부분을 초기화하여 다음 작업을 준비
 		  }
 		  
 		  result = ps.executeBatch();//일괄처리
@@ -102,7 +102,7 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 	
 	/**
-	 * 상품으로 재고량 감소시키키
+	 * 주문한 상품의 재고를 감소시키는 메소드. 주문 수량만큼 재고를 감소시킨다.
 	 * */
 	public int[] decrementStock(Connection con , List<OrderLine> orderLineList)throws SQLException {
 		 PreparedStatement ps=null;
@@ -128,7 +128,7 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 	
 	/**
-	 * 상품 총구매금액 구하기
+	 * 주문한 상품의 총 금액을 계산하는 메소드. 각 상품의 가격과 수량을 곱한 뒤, 총합을 구한다.
 	 * */
 	public int getTotalAmount(Orders order) throws SQLException { //상품가격 , 수량
 		List<OrderLine> orderLineList= order.getOrderLineList();
@@ -145,7 +145,7 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 	
 	/**
-	 * 주문내역 보기
+	 * 특정 사용자의 주문 내역을 조회하는 메소드. 사용자 ID를 기반으로 모든 주문 내역을 가져온다.
 	 * */
 	public List<Orders> selectOrdersByUserId(String userId)throws SQLException{
 		Connection con=null;
@@ -176,7 +176,7 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 	
 	/**
-	 * 주문번호에 해당하는 주문상세 가져오기
+	 * 주문 번호에 해당하는 주문 상세 정보를 조회하는 메소드. 주문 번호로 주문된 모든 상품 정보를 가져온다.
 	 * */
 	public List<OrderLine> selectOrderLine(int orderId)throws SQLException{
 		Connection con=null;

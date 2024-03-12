@@ -31,6 +31,7 @@ create table reply(
   reply_regdate date --등록일
 );
 
+drop sequence reply_no_seq;
 --댓글에서 사용할 시퀀스생성
 create sequence reply_no_seq nocache;
 
