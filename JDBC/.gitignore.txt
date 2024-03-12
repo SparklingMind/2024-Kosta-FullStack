@@ -1,2 +1,0 @@
-/imgCapture/
-/교안/
