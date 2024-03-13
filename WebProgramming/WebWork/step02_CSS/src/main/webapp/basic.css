@@ -1,0 +1,42 @@
+/*css문법*/
+/*태그이름*/
+h3, h2 {
+	color: red;
+	background: yellow;
+}
+/*class로 찾기*/
+.a {
+	text-align: center;
+	text-decoration: underline;
+}
+/*id로 찾기*/
+#a {
+	font-size: italic
+}
+/*div태그의 바로 하위 p 태그만*/
+div>p {
+	color: blue;
+}
+/*div태그의 모든 하위 p 태그*/
+div p {
+	color: blue;
+}
+/*속성으로 찾기 [ ]*/
+[type] {
+	border: double 3px red;
+}
+
+[type=text] {
+	font-size: 20px;
+}
+
+[name$=d] {
+	background-color: yellow;
+}
+
+table tr:nth-child(2n){
+	background-color: orange;
+}
+table tr:nth-child(1){
+	background-color: pink;	
+}

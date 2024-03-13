@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style type="text/css">
+/*태그이름*/
+h3, h2 {
+	color: red;
+	background: yellow;
+}
+/*class로 찾기*/
+.a {
+	text-align: center;
+	text-decoration: underline;
+}
+/*id로 찾기*/
+#a {
+	font-size: italic
+}
+/*div태그의 바로 하위 p 태그만*/
+div>p {
+	color: blue;
+}
+/*div태그의 모든 하위 p 태그*/
+div p {
+	color: blue;
+}
+/*속성으로 찾기 [ ]*/
+[type] {
+	border: double 3px red;
+}
+
+[type=text] {
+	font-size: 20px;
+}
+
+[name$=d] {
+	background-color: yellow;
+}
+
+table tr:nth-child(2n){
+	background-color: orange;
+}
+table tr:nth-child(1){
+	background-color: pink;	
+}
+
+</style>
+</head>
+<body>
+	<!-- CSS inline 방법 
+: 간단하게 특정한 태그에만 적용할 때는 편하고 직관적이고
+속성이 많아지면 복잡하고 재사용이 안 되어 중복속성이 많아진다.-->
+	<h3>CSS 적용방법</h3>
+	<h3 style="color: red">CSS 적용방법입니다.</h3>
+	<hr>
+	<div>
+		<h4>My name is Donald</h4>
+		<p>I live in Duckburg.</p>
+	</div>
+
+	<hr>
+	<form>
+		이름:<input type="text" name="name"> <br> 비번:<input
+			type="password" name="pwd"> <br>
+	</form>
+	<hr>
+<!-- emmet으로 만든 테이블 -->
+<table>
+   <tr>
+     <td>1</td>
+     <td>2</td>
+     <td>3</td>
+   </tr>
+   <tr>
+     <td>1</td>
+     <td>2</td>
+     <td>3</td>
+   </tr>
+   <tr>
+     <td>1</td>
+     <td>2</td>
+     <td>3</td>
+   </tr>
+ </table>
+</body>
+</html>
