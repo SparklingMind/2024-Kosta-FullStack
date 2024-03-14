@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style type="text/css">
+.a {
+	background-color: red;
+	/*padding : 40px 10px;*/ /*상하 & 좌우*/
+	/*padding : 40px 20px 10px;*/ /*상 & 좌우 & 하*/
+	padding : 40px 10px 20px 50px; /*상하좌우 각각 시계방향으로 적용*/
+	
+}
+
+.b {
+	background-color: green;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	margin-right: 50px;
+	padding-top: 10px;
+	padding-left : 30px;
+	padding-bottom : 30px;
+	
+	text-align:right;
+	
+	
+}
+	/*margin의 상하는 크기는 위와 아래에 놓이는 element와 상하 크기를 비교해서 큰 값으로 적용된다. (겹치는 부분은 무시 된다.)*/
+.c {
+	background-color: blue;
+	margin-left: 50px;
+	margin-top : 40px;
+	width :500px;
+	height: 300px;
+	color : white;
+	/* border-style: dotted dashed groove ridge; /*상 우 하 좌*/
+	border-width : 20px 15px 5px 10px; /*상 우 하 좌 */
+	border-color : skyblue pink;/*상하 좌우*/
+	border-radius : 150px 30px;
+	text-align:center;
+	font-size:20px;
+	vertical-align : middle;
+	display: table-cell;
+}
+</style>
+</head>
+<body>
+	<div class="a">margin, padding, border 연습하기</div>
+	<div class="b">margin, padding, border 연습하기</div>
+	<div class="c">margin, padding, border 연습하기</div>
+</body>
+</html>

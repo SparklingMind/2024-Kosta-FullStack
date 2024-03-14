@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+/*
+	box- sizing 속성이 없으면
+	width = width + padding + border-width
+	height = height + padding + border-width
+*/
+div {
+	width: 300px;
+	height: 200px;
+}
+
+.a {
+	background-color: red;
+}
+
+.b {
+	background-color: green;
+	padding: 30px;
+	border: 20px pink solid;
+	box-sizing: border-box;
+}
+</style>
+</head>
+<body>
+	<div class="a">box-sizing 연습하기</div>
+	<div class="b">box-sizing 연습하기</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<meta name="viewport" content="width=device-width">
+<title>Insert title here</title>
+<style type="text/css">
+  body{
+    padding: 30px;
+    background-color: black;
+  }
+ 
+  img{
+    width: 100%; height: 100%;
+    object-fit: cover;/*종횡비가 유지*/
+  }
+  
+  .container{
+  	display: grid;
+  	grid-template-columns : repeat(3,1fr);
+  	grid-template-rows: 150px;
+  	grid-template-areas : 
+  	'a a a'
+  	'b c c'
+  	'd e f'
+  	'd g f'
+  }
+  
+  .img1 {grid-area : a}
+  .img2 {grid-area : b}
+  .img3 {grid-area : c}
+  .img4 {grid-area : d}
+  .img5 {grid-area : e}
+  .img6 {grid-area : f}
+  .img7 {grid-area : g}
+  
+ 
+  
+</style>
+</head>
+<body>
+  <div class="container">
+  <img src="https://picsum.photos/id/237/200/200" alt="" class="img1">
+  <img src="https://picsum.photos/id/238/200/200" alt="" class="img2">
+  <img src="https://picsum.photos/id/239/200/200" alt="" class="img3">
+  <img src="https://picsum.photos/id/240/200/200" alt="" class="img4">
+  <img src="https://picsum.photos/id/241/200/200" alt="" class="img5">
+  <img src="https://picsum.photos/id/7/200/200" alt="" class="img6">
+  <img src="https://picsum.photos/id/8/200/200" alt="" class="img7">
+ 
+  </div>
+</body>
+</html>

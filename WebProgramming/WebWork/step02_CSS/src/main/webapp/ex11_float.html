@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style type="text/css">
+img {
+	width: 300px;
+	height: 300px;
+	float: left; /*다른 요소들과 어울리게 배치됨*/
+	opacity: 0.5;
+	border-radius: 150px;
+}
+h1{
+	clear:both; /*img의 영향을 받은 float 속성을 없애서 그림과 어울리는 게 아니라 밑으로 오게 만들었다. */
+	text-shadow: 3px 3px 5px red;
+	font-style : italic;
+}
+
+
+</style>
+</head>
+<body>
+	<!-- css의 float는 원래의 목적은 img와 text에 대한 배치 -->
+	<img alt="고양이들" src="images/a.jpg">
+	<h2>이름: kitty</h2>
+	<h2>나이 : 3</h2>
+	<h2>주소 : 스웨덴</h2>
+	<h2>연락처 : 010- 0000-0000</h2>
+	
+	<h1>
+		새로운 주제입니다.
+	</h1>
+</body>
+</html>
