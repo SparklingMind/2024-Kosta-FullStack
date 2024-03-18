@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>Math 객체와 Array</h3>
+	<script type="text/javascript">
+		//난수발생
+		let nansu = Math.random();
+		document.write(`nansu = ${nansu}<br>`);
+
+		let convert = Math.floor((nansu * 10) + 1);
+		document.write(`convert = ${convert}<br>`);
+		const arr1 = new Array(5); //5개의 공간배열생성 //const arr1 = []; 형태도 가능
+		const arr2 = new Array(1, 3, "Jane"); //3개의 공간에 값을 저장
+		const arr3 = [ 2, 4, 5, 7, true, 3, 44 ];	//배열 생성시 가장 많이 쓰는 형태
+		const arr4 = [ [ 1, 3, 4 ], [ "a", "b", "c" ] ];
+
+		document.write(`arr1 = ${arr1}<p>`);
+		document.write(`arr2 = ${arr2.toString()}<p>`);
+		document.write(`arr3 = ${arr3.toString()}<p>`);
+		document.write(`arr4 = ${arr4}<p>`); //toString을 하지 않아도 자동으로 호출.
+
+		//출력함수 호출
+		printArr(arr1);
+		printArr(arr2);
+		printArr(arr3);
+		printArr(arr4);
+		
+		
+		//배열방에 있는 각 번지수의 값을 조회해보자.
+		function printArr(objArr) {
+			document.write(`배열길이 : ${objArr.length}<p>`);
+			for (let i = 0; i < objArr.length; i++) {
+				document.write(`objArr[${i}] = ${objArr[i]}<br>`);
+			}
+			document.write("<hr>");
+		}
+		
+		//값 변경
+		arr1[0] = "hi";
+		arr1.push("nice");
+		arr2.push("티라노");	//끝에 추가
+		arr2[5] = "5번지?"	//4번지는 undefined로 빈공간이 생기고 5번지에 추가가 된다! ->자바스크립트는 리사이징 가능
+		
+		document.write("<h3>값 변경 이후 출력</h3>");
+		printArr(arr1);
+		printArr(arr2);
+		
+		document.write("<h3>--배열에 forEach 사용해보자 --</h3>");
+		
+		arr3.forEach(function(item, index){
+			alert(`${item} = ${index}`);
+		})
+	</script>
+
+</body>
+</html>

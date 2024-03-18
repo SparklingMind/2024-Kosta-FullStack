@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+  let backgroundColor = ["red","green","blue","orange"];
+  let index = backgroundColor.length;
+  console.log(index);
+  
+  	onload = function(){
+  		i=0;
+  		setInterval(function(){
+  			document.body.style.backgroundColor = backgroundColor[i];
+  			i==index ? i=0 : i++; 
+  		},1000);
+  	};
+  </script>
+</body>
+</html>

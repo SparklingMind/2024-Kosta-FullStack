@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>setTimeout</title>
+<script type="text/javascript">
+function repeat(){
+	console.log(1);
+	a = setTimeout(repeat, 1000);	//setTimeout은 반복적으로 사용하기 위해서는 재귀함수의 형태가 필요
+}
+	onload = function(){
+		document.getElementById("start").onclick = function(){
+			repeat();
+		};
+		
+	document.getElementById("stop").onclick = function(){
+			clearTimeout(a);
+		};
+	}
+</script>
+</head>
+<body>
+<button id = "start">시작</button>
+<button id = "stop">중지</button>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>함수를 const로 선언해보자!</h2>
+<script type="text/javascript">
+//함수를 변수에 할당해서 사용
+const test = function(name){	//불변인 경우 cosnt사용을 권장. 동일 함수 이름 또 만들 수 있으므로.
+	name ? console.log(`이름은 ${name} 입니다.`) : console.log("이름이 없습니다.");
+	return 5;
+	};
+const test2 = function(name,age){
+	console.log(`이름은 ${name}이고, 나이는 ${age}살 입니다.`);
+	return "ok";
+}
+
+/* //함수 호출
+test(null);
+let result = test2("July",12);
+console.log("결과 = " + result); */
+
+console.log(`${typeof test}`);	//함수는 객체
+console.log(`${typeof test()}`);
+</script>
+</body>
+</html>

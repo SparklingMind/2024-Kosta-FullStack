@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>변수의 선언 방법 - let 와 const : ES6</h1>
+<script type="text/javascript">
+  let a;
+  let b=10;
+  let c="희정";
+  
+  d= 3.14;// 결국 var 생략 
+  
+  document.write("<h3>");
+  document.write("a = " + a +" , " + (typeof a) +"<br>");
+  document.write("b = " + b +" , " + (typeof b) +"<br>");
+  document.write("c = " + c +" , " + (typeof c) +"<br>");
+  document.write("d = " + d +" , " + (typeof d) +"<hr>");
+  
+  //동일한 이름의 변수를 또 선언 가능? x
+  //let a = 100;		  
+		  
+  //선언전에 사용가능한지?	x
+   //document.write("age = " + age +" , " + (typeof age) +"<br>");	
+   //let age=10;
+   
+   
+   //함수안에서 블록{}단위로 let을 써보자.
+    function test3(){
+    	let age=20;
+    	
+    	{
+    		let addr="서울";
+    		
+    	}
+    	
+    	for(let i=1; i<=10 ; i++){
+    		
+    	}
+    	
+    	console.log("age = " + age);
+    	//console.log("addr = " + addr);
+    	//console.log("i = " + i);
+    	
+    }
+    
+    test3();
+    
+   /* function test(){
+    	alert(1)
+    	
+    }
+    
+    function test(){
+    	alert(2)
+    }*/
+    
+    const test = function(){
+    	alert(1);
+    }
+    
+    const test2 = function(){
+    	window.alert(2);
+    }
+    
+    test();
+    test2();
+    
+    ////////////////////////////////////////
+    let message;
+    const addr="오리역";//상수는 반드시 초기화 필수!!!
+    
+    //상수는 값변경 불가.
+    message="하이";
+    //addr="서울"; //오류 값변경 불가.
+    console.log("message = " + message);
+   //console.log("addr = " + addr);
+    
+   var ename="나미";
+   let dname="교육";
+   
+   console.log("window.ename = " + window.ename);
+   
+   console.log("window.dname = " + window.dname);
+   console.log("dname = " + dname);
+   
+    
+  
+  document.write("</h3>");
+
+</script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h1> JavaScript 변수에 대해 공부해보자</h1>
+<script type="text/javascript">
+   //변수선언 : var    |  const  vs let - ES6추가 
+   
+   var a;
+   var b=20;
+   var c='희정'
+   d=3.14;//var생략해도 된다.
+   
+    document.write("<h3>");
+    document.write("a = " + a +" , " + (typeof a) +"<br>");
+    document.write("b = " + b +" , " + (typeof b) +"<br>");
+    document.write("c = " + c +" , " + (typeof c) +"<br>");
+    document.write("d = " + d +" , " + (typeof d) +"<hr>");
+    
+    //값변경해보자
+    a=new String("안녕");
+    b="신기하다";
+    c = new Array(1,3,true,"하이", 3.5);
+    d=false;
+    
+    document.write("a = " + a +" , " + (typeof a) +"<br>");
+    document.write("b = " + b +" , " + (typeof b) +"<br>");
+    document.write("c = " + c +" , " + (typeof c) +"<br>");
+    document.write("d = " + d +" , " + (typeof d) +"<hr>");
+    
+    /*
+       동일한 이름의 변수를 또 선언하면?? OK
+       변수를 선언전에 사용할수 있을까?	OK
+        : 자바스크립트에는 호이스팅이라는 개념이 있다.
+        호이스팅이란 변수, 함수를 미리 선언부 맨위로 끌어올린다는뜻이다.
+        		
+    
+    */
+    var a="되니?";//또 선언 OK
+    document.write("a = " + a +" , " + (typeof a) +"<br>");
+    
+    document.write("선언전 : name = " + name +" , " + (typeof name) +"<br>");
+    
+    var name="효리";//선언전에 사용 가능하다.
+    
+    document.write("선언후 : name = " + name +" , " + (typeof name) +"<br>");
+    
+    
+    //함수호출
+   /* test();
+    
+    function test(){
+    	alert("aaaaa");
+    }
+    
+    function test(){
+    	alert("bbbb");
+    }*/
+   /////////////////////////////////////// 
+    function test(){
+    	alert("test() 함수 입니다.")
+    	//전역변수 vs 지역변수 
+    	var a="지역변수 a"; //
+    	
+    	//var phone="111"; //지역변수는 선언된 함수안에서만 사용가능
+    	
+    	phone="222";//지역변수에서 var생략하면 전역변수 된다!!!
+    	
+    	alert("a = " + a);
+    	alert("this.a = " + this.a);
+    	
+    	alert("phone = " + phone);
+    	
+   }
+    
+    function test2(){
+    	alert("test2함수 입니다.")
+    	alert("a = " + a);//전역변수
+    	alert("this.a = " + this.a);//전역변수
+    	
+    	alert("phone = " + phone);
+    }
+   
+    //함수호출해보자.
+    //test();
+   // test2();
+    
+    //////////////////////////////////////
+    //자바스크립트 변수의 scope 블록단위가 아니고 함수단위이다. 
+    function test3(){
+    	var age=20;
+    	
+    	{
+    		var addr="서울";
+    		
+    	}
+    	for(var i=1; i<=10 ; i++){
+    		
+    	}
+    	
+    	console.log("age = " + age);
+    	console.log("addr = " + addr);
+    	console.log("i = " + i);
+    	
+    }
+    
+    test3();
+    
+    
+    document.write("</h3>")
+   
+   
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+

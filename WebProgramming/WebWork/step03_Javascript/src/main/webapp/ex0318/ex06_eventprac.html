@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+div {
+	width: 300px;
+	height: 200px;
+	border: 1px red solid;
+	overflow: auto;
+}
+</style>
+<script type="text/javascript">
+	function cal() {
+		let no1 = parseFloat(prompt("첫 번째 수?",5));
+		let no2 = parseFloat(prompt("두 번째 수?",5));
+		let oper = prompt("연산기호(+,-,*,/)?","+");
+		
+		if(isNaN(no1)||isNaN(no2)){
+			alert("숫자만 입력하세요");
+			confirm("다시 하시겠습니까?") ? cal() : alert("다음에 이용해주세요.")
+			
+		}else{
+			switch (oper) {
+			case "+":
+				result = no1 + no2;
+				break;
+			case "-":
+				result = no1 - no2;
+				break;
+			case "*":
+				result = no1 * no2;
+				break;
+			case "/":
+				result = no1 / no2;
+				break;
+			default:
+				alert("연산기호를 잘못 입력했어요.");
+				confirm("다시 입력하시겠습니까?") ? cal() : alert("다음에 이용해주세요.");
+			}
+			
+			//출력
+			document.getElementById("result").innerHTML = "<h4>" + no1 + oper + no2 + "=" + result + "</h4>"
+			
+			
+		}
+	}
+	onload = function(){
+		//이벤트 등록
+		document.querySelector("button").onclick = cal;
+	}
+	
+	function add(a, b) {
+		return a + b;
+	}
+	function minus(a, b) {
+		return a - b;
+	}
+	function multiply(a, b) {
+		return a * b;
+	}
+	function divide(a, b) {
+		return a / b;
+	}
+	function calculate(num1, num2, operation) {
+
+		return document.querySelector("#div");
+		/* .innerHTML += operation(num1, num2); */
+
+	}
+</script>
+</head>
+<body>
+<h2> 계산해보자 </h2>
+	<button>계산하기</button>
+	<div id = "result"></div>
+</body>
+</html>

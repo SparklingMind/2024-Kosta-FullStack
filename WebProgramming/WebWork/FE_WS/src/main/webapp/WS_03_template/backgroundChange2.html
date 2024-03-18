@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+  let backgroundColor = ["pink","skyblue","blue","yellow","brown"];
+  let length = backgroundColor.length;
+
+  
+  console.log("length = "+ length);
+  
+  	onload = function(){
+  		i=0;
+  		setInterval(function(){
+  			nansu = Math.floor(Math.random() * 5);
+  			console.log("nansu"+ nansu);
+  			document.body.style.backgroundColor = backgroundColor[nansu];
+  			
+  		},1000);
+  	};
+  </script>
+</body>
+</html>

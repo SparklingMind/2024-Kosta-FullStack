@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>연산자의 종류</h1>
+<script type="text/javascript">
+  //변수선언
+  let i=10; //number
+  let j="10";//string
+  
+  document.write("<h3>");
+  //ES6 -> 템플릿문자열 홑따옴표 = 	`문자열 , 변수`		
+   document.write(`i=${i} , type = ${typeof i}<br>`);
+  document.write(`i==j = ${i==j}<br>`);//값만비교
+  document.write(`i===j = ${i===j}<br>`);//값 + 타입 비교
+  
+  /*
+   형변환 : 문자열 -> number 변환 
+     1) window.parseInt()
+     2) Number()
+     
+     3) isNaN()함수 
+      
+  */
+  
+  document.write("<hr><h4>형변화 TEST ----<p>");
+  let data1 ="a100";    
+  document.write(`data1=${data1} , type = ${typeof data1}<br>`);   
+  
+  document.write(`parseInt(data1) = ${parseInt(data1)} <br>`); //NaN = Not a Number
+  document.write(`Number(data1) = ${Number(data1)} <hr>`);  //NaN = Not a Number 
+  
+  
+   data1 ="100a";   
+  document.write(`data1=${data1} , type = ${typeof data1}<br>`);   
+  
+  document.write(`parseInt(data1) = ${parseInt(data1)} <br>`); //문자가 나오기전까지 숫자를 변환.
+  document.write(`Number(data1) = ${Number(data1)} <hr>`); //NaN
+  
+  if( isNaN(data1) ){ //is Not a Number
+	  alert("숫자 아니다.");
+  }else{
+	 alert("숫자다!");
+  }
+  
+  let a=10 , b="3";
+  document.write(`a + b = ${a+b}<br>`); //103
+  
+  document.write(`a - b = ${a-b}<br>`);//7
+  document.write(`a * b = ${a*b}<br>`);//30
+  
+  /*내장함수
+      1)alert() - 메시지출력
+      2) prompt() - 사용자 입력창
+      3) confirm() - 의사를 물어보는 창
+  
+  */
+   //window.prompt("이름은?", "희정");
+   
+   //window.prompt("나이?");
+      
+   //window.prompt("주소는?", "서울",100);
+   
+   let age = window.prompt("나이?",20); //입력받은 값은 무조건 string이다.
+   document.write(`나이는 ${age-1}<br>`);
+   document.write(`나이는 ${age+1}<br>`);
+   document.write(`나이는 ${parseInt(age)+1}<br>`);
+   
+   //////////////////////////////////////////////
+   let result = confirm("삭제할래요?"); //결과 boolean형
+   document.write(`결과 = ${result}`);
+  document.write("</h3>");
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript">
+//버튼을 클릭했을 때 할 일 = 기능
+function test(){
+	alert("test() 호출됨.")
+}
+function test2(th){
+	//버튼의 외곽선을 추가한다. -> css 적용
+	th.style.border = "double red 3px";
+}
+function test3(){
+	//h3태그에 css 적용한다.
+	//자바스크립트에서 html 요소를 찾아서 접근 -> dom 접근
+	/*
+		특정 element를 찾는 방법
+	
+	//속성으로 id 찾는다. (절대로 중복 안 되고 무조건 한 개)
+	document.getElementById(id); 
+	
+	//찾는 element가 0개 이상
+	document.getElementByClassName();
+	document.getElementByName();
+	
+	document.querySelector(selector);
+	document.querySelectorAll(selectors);
+	*/
+	
+	let nodeH3 = document.querySelector("h3");
+	alert(nodeH3);
+	nodeH3.style.backgroundColor = "blue";
+}
+function test4(){
+	//모든 버튼의 글자크기와 바탕색을 변경
+	let nodeList = document.querySelectorAll("button")
+	console.log(nodeList);
+	for(let i=0;i<nodeList.length;i++){
+		nodeList[i].style.fontSize = "30px";
+		nodeList[i].style.backgroundColor = "pink";
+	}
+}
+</script>
+</head>
+<body>
+<h3>이벤트를 등록해보자 - 태그의 속성으로 on이벤트종류 = "함수이름()"</h3>
+<button onclick="test()">클릭1</button>
+<button onclick="test2(this)">클릭2</button>
+<button onclick="test3()">클릭3</button>
+<button onclick="test4()">클릭4</button>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>setTimeout</title>
+<script type="text/javascript">
+	onload = function(){
+		document.getElementById("start").onclick = function(){
+			console.log(1);
+			
+			a = setInterval(function(){
+				console.log(1);
+			},1000)
+		};
+		
+	document.getElementById("stop").onclick = function(){
+			clearInterval(a);
+		};
+	}
+</script>
+</head>
+<body>
+<button id = "start">시작</button>
+<button id = "stop">중지</button>
+
+</body>
+</html>
