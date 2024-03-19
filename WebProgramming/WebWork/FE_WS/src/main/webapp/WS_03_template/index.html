@@ -17,9 +17,9 @@
 	margin-top: 5px;
 }
 
-#main .main-item {
+/* #main .main-item {
 	
-}
+} */
 
 #main .main-item img {
 	width: 100%;
@@ -39,18 +39,29 @@
 	let index = bannerText.length - 1;
 	console.log(index);
 	onload = function()
+	
 	{
 		i=0;
 		setInterval(function() {
 			document.getElementById("banner").innerText = bannerText[i];
-			i==index ? i=0 : i++; 
+			i==index ? i=0 : i++;
+			console.log("i = " + i);
 		}, 1000);
+		
+		document.querySelectorAll(".main-item-btn").forEach(function(item,index){
+			//세 개의 버튼에 한 번에 이벤트 등록
+			item.onclick = function(){
+				let mainItem = item.closest(".main-item").getAttribute("data-main-item-id");
+				alert(mainItem);
+			};
+		});
 	};
 
-	function showDetails(th){
+	/* function showDetails(th){
 		let mainItem = th.closest(".main-item").getAttribute("data-main-item-id");
 		alert(mainItem);
-	}
+	} */
+	
 	
 	
 </script>
@@ -81,7 +92,7 @@
 				<h2>main-item 1</h2>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
 					do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-				<button onclick="showDetails(this)">button 1</button>
+				<button class = "main-item-btn">button 1</button>
 			</div>
 
 			<div class="main-item" data-main-item-id="20">
@@ -89,7 +100,7 @@
 				<h2>main-item 2</h2>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
 					do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-				<button onclick="showDetails(this)">button 2</button>
+				<button class = "main-item-btn">button 2</button>
 			</div>
 
 
@@ -99,7 +110,7 @@
 				<h2>main-item 3</h2>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
 					do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-				<button onclick="showDetails(this)">button 3</button>
+				<button class = "main-item-btn">button 3</button>
 			</div>
 
 

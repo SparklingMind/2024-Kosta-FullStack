@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 날짜 계산
+날짜 - 날짜 = ms초
+(날짜 - 날짜)/1000 = 초
+(날짜 - 날짜)/1000/60 = 분
+(날짜 - 날짜)/1000/60/60 = 시간
+(날짜 - 날짜)/1000/60/60/24 = 일
+*/
+
+onload = function(){
+	//현재 날짜를 ey,em,ed에 넣기
+	const today = new Date();
+	console.log(today);
+	document.getElementById("ey").value = today.getFullYear();
+	document.getElementById("em").value = today.getMonth()+1;
+	document.getElementById("ed").value = today.getDate();
+	//계산하기 클릭 이벤트
+	document.querySelector("[value=계산하기]").onclick = function(){
+		//sy,sm,sd를 하나의 Date로 생성
+		const startDate = new Date();
+		startDate.setFullYear(document.getElementById("sy").value);
+		startDate.setMonth(document.getElementById("sm").value-1);
+		startDate.setDate(document.getElementById("sd").value);
+		console.log(startDate);
+		//ey,em,ed를 하나의 Date로 생성
+		const endDate = new Date();
+		endDate.setFullYear(document.getElementById("ey").value);
+		endDate.setMonth(document.getElementById("em").value-1);
+		endDate.setDate(document.getElementById("ed").value);
+		//두 날짜의 일수 차이를 구한다.
+		const dateGap = endDate - startDate;
+		console.log(dateGap);
+		
+		alert(`${dateGap/1000/60/60/24}일이 지났습니다.`);
+	}
+}
+</script>
+</head>
+
+<body>
+
+<h3>두 날짜의 Gap</h3>
+<form>
+	<input type="text" size="4" name="sy" id="sy">년
+	<input type="text" size="2" name="sm" id="sm">월
+	<input type="text" size="2" name="sd" id="sd">일
+	 ~ 
+	<input type="text" size="4" name="ey" id="ey">년
+	<input type="text" size="2" name="em" id="em">월
+	<input type="text" size="2" name="ed" id="ed">일
+		
+	<input type="button" value="계산하기">
+	
+</form>
+
+</body>
+</html>

@@ -2,19 +2,20 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>backgroundChange</title>
 </head>
 <body>
 <script type="text/javascript">
-  let backgroundColor = ["red","green","blue","orange"];
+  let backgroundColor = ["red","green","blue","orange", "black"];
   let index = backgroundColor.length;
   console.log(index);
-  
+  i=0;
   	onload = function(){
-  		i=0;
+  		
   		setInterval(function(){
   			document.body.style.backgroundColor = backgroundColor[i];
-  			i==index ? i=0 : i++; 
+  			i==index ? i=0 : i++;
+  			console.log("i = " + i);
   		},1000);
   	};
   </script>

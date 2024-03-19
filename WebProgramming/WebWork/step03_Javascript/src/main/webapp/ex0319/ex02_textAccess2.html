@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>JavaScript에서 폼 요소 접근하기</title>
+
+<style type="text/css">
+#result {
+	width: 200px;
+	height: 100px;
+	border: 1px solid red;
+	overflow: auto;
+}
+</style>
+<script type="text/javascript">
+	onload = function() {
+		document.getElementById("f").onsubmit = function(e) {	//onsubmit을 통해 버튼을 누르는 게 아니라 enter를 눌러도 함수가 실행된다.
+			let inputValue = document.f.input.value;
+			//alert(inputValue);
+			if(inputValue==""){
+				alert("값을 입력해주세요");
+				document.f.input.focus();//커서놓기
+				//return;
+			}
+			event.preventDefault();	//기본 이벤트의 실행을 막는다.
+			document.f.output.value = inputValue;
+			document.getElementById("result").innerHTML += inputValue + "<br>";
+			//input의 데이터 지우기
+			document.f.input.value = "";
+			//input에 커서 놓기
+			document.f.focus();
+			
+			event.preventDefault();
+		}
+	}
+</script>
+</head>
+<body>
+	<h2>JavaScript에서 폼 요소 접근하기</h2>
+	<form action="https://.naver.com" method="get" name="f" id="f">
+		입력 : <input type="text" name="input"><br> 
+		출력 : <input type="text" name="output"><br> 
+	<input type="submit" value="옮기기" id="moveBtn"><br>
+	</form>
+	<hr>
+	<div id="result"></div>
+</body>
+</html>

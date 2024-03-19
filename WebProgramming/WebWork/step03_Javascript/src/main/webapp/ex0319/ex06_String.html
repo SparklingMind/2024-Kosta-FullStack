@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>String 관련 메서드</title>
+</head>
+<body>
+<h3>String 관련 메서드</h3>
+<script type="text/javascript">
+	let str1 = "abcd abcd abcd";	//type : String
+	let str2 = new String("abcd abcd abcd");	//type : object
+	
+	document.write("<h4>");
+	document.write(`str1 = ${str1}<br>`);
+	document.write(`str2 = ${str2}<br>`);
+	document.write(`str1 == str2 ${str1==str2}<br>`);	//문자가 동일한지 비교
+	document.write(`str1 === str2 ${str1===str2}<hr>`);	//문자 + type 이 동일한지 비교
+	
+	/*
+		cahrAt(index) : index에 해당하는 문자를 리턴(index는 0부터 시작)
+		해당하는 index에 문자가 없으면 공백 리턴
+	*/
+	
+	document.write(`str1.charAt(0) = ${str1.charAt(0)}<br>`);
+	document.write(`str1.charAt(7) = ${str1.charAt(7)}<br>`);
+	document.write(`str1.charAt(20) = ${str1.charAt(20)}<br>`);
+	
+	/*
+		indexOf(문자열) : 문자열의 위치 index를 리턴, 왼쪽에서부터 찾기
+		indexOf(문자열, 시작위치) : 문자열을 시작위치에서부터 찾기
+		
+			-문자열이 없으면 -1 리턴
+	*/
+	document.write(`str1.indexOf('c') = ${str1.indexOf('c')}<br>`);
+	document.write(`str1.indexOf('bc') = ${str1.indexOf('bc')}<br>`);
+	document.write(`str1.indexOf('f') = ${str1.indexOf('f')}<br>`);
+	
+	document.write(`str1.indexOf('c',4) = ${str1.indexOf('c',4)}<br>`);
+	
+	/*
+	lastIndexOf(문자열) : 문자열의 위치 index를 리턴, 오른쪽에서부터 찾기
+	lastindexOf(문자열, 시작위치): 문자열을 오른쪽의 시작위치부터 찾기
+		-문자열이 없으면 -1 리턴
+	주의 : 맨 오른쪽의 index가 0이 되는 것은 아니다. 여전히 맨 오른쪽은 가장 큰 수.
+	*/
+	
+	document.write(`str1.lastIndexOf('c') = ${str1.lastIndexOf('c')}<br>`);
+	document.write(`str1.lastIndexOf('bc') = ${str1.lastIndexOf('bc')}<br>`);
+	document.write(`str1.lastIndexOf('f') = ${str1.lastIndexOf('f')}<br>`);
+	
+	document.write(`str1.lastIndexOf('c',4) = ${str1.lastIndexOf('c',4)}<br>`);
+	
+	/*
+	문자열 일부분 추출하기
+		1) substring(index1, index2)
+			: index1부터 index2까지 문자열 리턴(항상 index2는 index1보다 커야 한다.)
+			: index1만 있으면 index1부터 끝까지 문자열 리턴.
+			
+		2) substr(index, length)
+			: index부터 length만큼 문자열 리턴
+			: index만 있으면 index부터 끝까지 문자열 리턴
+	*/
+	
+	
+	document.write(`str1.length = ${str1.length}<br>`);
+	document.write(`str1.substring(0,4) = ${str1.substring(0,4)}<br>`);
+	document.write(`str1.substring(5,5) = ${str1.substring(5,5)}<br>`);
+	document.write(`str1.substring(6) = ${str1.substring(6)}<br>`);
+	
+	document.write(`str1.substr(0,4) = ${str1.substr(0,4)}<br>`);
+	document.write(`str1.substr(5,5) = ${str1.substr(5,5)}<br>`);
+	document.write(`str1.substr(6) = ${str1.substr(6)}<br>`);
+	
+	/*
+	split("문자열") : 문자열을 기준으로 나누어 배열로 리턴
+    */
+	let result = str1.split(" ");
+	document.write(`result = ${result}<br>`); //result = abcd,abcd,abcd
+	document.write(`result.length = ${result.length}<br>`); //result.length = 3
+	
+	for(let i in result){
+        document.write(`result[${i}] = ${result[i]}<br>`);
+    }
+			
+	document.write("</h4>");
+</script>
+</body>
+</html>

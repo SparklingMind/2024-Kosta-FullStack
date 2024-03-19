@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>JavaScript에서 폼 요소 접근하기</title>
+<style type="text/css">
+#result {
+	width: 200px;
+	height: 100px;
+	border: 1px solid red;
+	overflow: auto;
+}
+</style>
+<script type="text/javascript">
+	onload = function() {
+		document.getElementById("moveBtn").onclick = function() {
+			//alert(1);
+			/*
+			자바스크립트에서 폼에 접근하는 법
+			window.document.폼이름.input박스이름.속성 or
+			window.document.폼이름.input박스이름.함수()
+			
+			 */
+
+			//input의 value를 읽어서 output 넣기, div 넣기
+			let inputValue = document.f.input.value;
+			//alert(inputValue);
+			if(inputValue==""){
+				alert("값을 입력해주세요");
+				document.f.input.focus();//커서놓기
+				return;
+			}
+			document.f.output.value = inputValue;
+			document.getElementById("result").innerHTML += inputValue + "<br>";
+			//input의 데이터 지우기
+			document.f.input.value = "";
+			//input에 커서 놓기
+			document.f.focus();
+		}
+	}
+</script>
+</head>
+<body>
+	<h2>JavaScript에서 폼 요소 접근하기</h2>
+	<form action="" method="get" name="f" id="f">
+		입력 : <input type="text" name="input"><br> 출력 : <input
+			type="text" name="output"><br> <input type="button"
+			value="옮기기" id="moveBtn"><br>
+	</form>
+	<div id="result"></div>
+</body>
+</html>

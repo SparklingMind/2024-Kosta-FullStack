@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Date Object 사용해보기</h2>
+<script type="text/javascript">
+	//날짜 생성
+	const today = new Date();
+	//const today = new Date(2024,10,20);	//date에서 월은 0부터 시작한다. 여기서 날짜는 2024-11-20이다.
+	//const today = new Date(2024,10,4,11,30,20);
+	
+	document.write("<h3>");
+	document.write(`today = ${today}`);
+	document.write(`today.toLocaleString = ${today.toLocaleString()}<br>`);
+	document.write(`today.getFullYear = ${today.getFullYear()}<br>`);
+	document.write(`today.getMonth = ${today.getMonth()}<br>`);
+	document.write(`today.getDate = ${today.getDate()}<br>`);
+	document.write(`today.getHours = ${today.getHours()}<br>`);
+	document.write(`today.getSeconds = ${today.getSeconds()}<br>`);
+	document.write(`today.getMinutes = ${today.getMinutes()}<hr>`);
+	
+	//요일 가져오기(0=일,1=월,2=화...)
+	document.write(`today.getDay() = ${today.getDay()}<br>`);
+	let day = ["일","월","화","수","목","금","토"];
+	document.write(`today.getDay() = ${day[today.getDay()]}<br>`);
+	
+	//날짜 변경 - setXxx()
+	today.setFullYear(2026);
+	today.setMonth(4); //5월
+	document.write(`today.toLocaleString = ${today.toLocaleString()}<br>`);
+	document.write("</h3>");
+	
+</script>
+
+</body>
+</html>

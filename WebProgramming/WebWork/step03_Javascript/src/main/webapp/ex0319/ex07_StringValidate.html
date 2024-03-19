@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<title>Document</title>
+
+<script type="text/javascript">
+	/*innerHTML or innerText 와 value의 비교
+	form, input, select, textarea, button 등의 태그는 value 속성을 사용하여 값을 가져오거나 설정한다.
+	그 외의 태그는 innerHTML 또는 innerText 속성을 사용하여 값을 가져오거나 설정한다.
+	 */
+
+	onload = function() {
+		//이벤트 등록
+		document.querySelector("[name=id]").onblur = function() {
+			/* //1. ID에 영문만 입력 가능하게 조건 부여. (유효성 체크)
+			console.log(event.target.value);
+			const v = event.target.value.toUpperCase();	
+				//대소문자 구분 안 하고 영문인 것만 체크하기 위해 일단 입력한 값을 모두 대문자로 바꿔줌.
+			for(let i=0;i<v.length;i++){
+				let ch = v.charAt(i);
+				if(ch<"A" || ch>"Z"){
+					document.getElementById("idSpan").innerHTML="<strong style = 'color:red'>영문만 입력하세요.</strong>";
+					event.target.value="";
+					return;	//함수를 빠져나가라.
+					
+				}
+				
+			}//for End    */
+
+			//////////////////////////////////////////////////
+			// 2. ID에 영문소문자, 숫자, 특수문자(@,!,%,*)만 허용
+			const data = "1234567890~!@@#$%^&*()qwertyuiopasdfhjgklzxcvbnm" //허용가능한 문자 저장
+			const v = event.target.value;
+			for (let i = 0; i < v.length; i++) {
+				let ch = v.charAt(i);
+				if (data.indexOf(ch) == -1) { //indexOf는 문자열에서 특정 문자의 위치를 찾아주는 함수. 없으면 -1을 반환한다.
+					document.getElementById("idSpan").innerHTML = "<strong style = 'color:red'>영문소문자, 숫자, 특수문자(@,!,%,*)만 입력하세요.</strong>";
+					event.target.value = "";
+					return; //함수를 빠져나가라.
+				}
+			}//forEnd
+		}//blurEnd
+
+		//3. age가 숫자만 입력하게 유효성 체크
+		function numberCheck(eleObj) {
+			if (isNaN(eleObj.value)) {
+				eleObj.nextSibling.innerHTML = "<strong style = 'color:red'>숫자만 입력하세요.</strong>";
+				eleObj.value = "";
+				eleObj.focus();
+				return false;
+			} else {
+				eleObj.nextSibling.innerHTML = "";
+				return true;
+			}
+
+		}//numbercheckEnd
+		document.querySelector("[name=age]").onblur = function() {
+			numberCheck(this);
+
+			/*숫자유무를 체크해주는 함수(isNaN을 이용)
+				:true 리턴하면 정상, flase이면 숫자 아니다.
+			 */
+
+		};
+
+		//4. 주민번호에 숫자가 아닌 다른 문자가 입력될 때마다 체크하고, 6글자 넘는 순간 다음 주민번호 칸으로 이동.
+		document.querySelector("[name=jumin1]").onkeyup = function() {
+			//마지막 글자의 숫자유무 체크하고 숫자 아니면 지우기
+			let ch = this.value.charAt(this.value.length - 1);
+
+			if (isNaN(ch)) {
+				alert("숫자만 입력하세요.");
+				this.value = this.value.substr(0, this.value.length - 1);
+				this.focus();
+				return;
+			}
+
+			if (this.value.length == 6) {
+				this.nextElementSibling.focus(); //다음 형제 요소 중 요소 노드를 선택
+			}
+		}; //keyupEnd
+
+		//5. 주민번호 첫 글자에 따라 남, 여가 자동 체크 되게 하기
+		document.querySelector("[name=jumin2]").onblur = function() {
+			//숫자유무체크
+			if (numberCheck(this)) { //숫자로만 되어 있다면 성별 체크 가능
+				if (this.value.charAt(0) == "1" || this.value.charAt(0) == "3")
+					document.querySelectorAll("[name=gender]")[0].checked = true;
+				else
+					document.querySelectorAll("[name=gender]")[1].checked = true;
+			}
+		}
+		
+		//6. 이메일에 @표시 유무 체크
+		document.querySelector("[name=email]").onblur = function(){
+			if(this.value.indexOf("@") == -1){	//indexOf는 문자열에서 특정 문자의 위치를 찾아주는 함수. 없으면 -1을 반환한다.
+				this.nextSibling.innerHTML = "<strong style = 'color:red'> @표시가 없습니다.</strong>";
+				this.value = "";
+				this.focus();
+			}else
+				this.nextSibling.innerHTML = "";
+		}
+	}; //loadEnd
+	/*
+	이벤트의 종류 - onXXX
+	click, load, submit
+	
+	focus, blur, keyup
+	
+	
+	 */
+</script>
+
+
+</head>
+<body>
+	<form name="form">
+		ID : <input type="text" name="id"><span id="idSpan"></span>
+		<p>
+			age : <input type="text" name="age"><span></span>
+		<p>
+			email : <input type="text" name="email"><span></span>
+		<p>
+		<fieldset>
+			<legend>주민번호 </legend>
+			<input type="text" size="6" name="jumin1"> - <input
+				type="text" size="7" name="jumin2"><span></span>
+			<p>
+
+				성별 : <input type="radio" name="gender" value="남자">남자 <input
+					type="radio" name="gender" value="여자">여자
+		</fieldset>
+
+
+	</form>
+
+</body>
+</html>
