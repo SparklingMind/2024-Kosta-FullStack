@@ -1,0 +1,55 @@
+<!DOCTYPE HTML >
+<html>
+ <head>
+  <title> New Document </title>
+ 	<meta charset="utf-8">
+ <script type="text/javascript">
+ 	onload = () => {
+ 		document.querySelectorAll("span").forEach((item)=>{
+ 			item.onclick = () => {
+ 				document.images[0].src = "img/" + event.target.getAttribute("data-name");
+ 			}
+ 		});
+ 	
+ 	
+ 	////////////////////////////////////////////////////////////////////////////
+ 	document.querySelectorAll(".imgOverOut").forEach((item)=>{
+ 		//마우스 over
+ 		item.onmouseover = () => {
+ 			//가로, 세로 2배 늘리기
+ 			item.width = item.width*2;
+ 			item.height = item.height*2;
+ 		}
+ 		
+ 		//마우스 out
+ 		item.onmouseout = () => {
+ 			//가로, 세로 2분의 1로 줄이기
+ 			item.width = item.width/2;
+ 			item.height = item.height/2;
+ 			
+ 		}
+ 	});
+ }
+ </script>
+ </head>
+
+ <body>
+ <img src="img/cat.gif" /><br/><br/>
+
+<span data-name = "monkey.gif">[ 원숭이 ]</span> &nbsp;&nbsp;
+<span data-name = "lion.gif">[ 사자 ]</span> &nbsp;&nbsp;
+<span data-name = "cat.gif">[ 고양이 ]</span> &nbsp;&nbsp;
+<span data-name = "dog.gif">[ 강아지 ]</span> &nbsp;&nbsp;
+  
+<hr color="red"/>
+
+<img src="img/monkey.gif"  width="70" height="60" class = "imgOverOut"/>&nbsp;&nbsp;
+
+<img src="img/cat.gif" width="70" height="60" class = "imgOverOut"/>&nbsp;&nbsp;
+
+<img src="img/dog.gif" width="70" height="60" class = "imgOverOut"/>&nbsp;&nbsp;
+
+<img src="img/lion.gif" width="70" height="60" class = "imgOverOut"/>&nbsp;&nbsp;
+ 
+ </body>
+</html>

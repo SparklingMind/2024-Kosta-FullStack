@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Simple Calculator</title>
+<style type="text/css">
+
+.calculator-container {
+            width: fit-content; /* 계산기 넓이를 자식 요소에 맞춤 */
+            margin: auto; /* 페이지 중앙에 배치 */
+            
+        }
+        .calculator-result {
+            width: 100%; /* 부모 요소의 넓이에 맞춤 */
+            padding: 10px; /* 내부 여백 */
+            margin-bottom : 10px;
+            background-color: #f0f0f0; /* 배경색 */
+            text-align: right; /* 텍스트 오른쪽 정렬 */
+            box-sizing: border-box; /* 패딩 포함하여 넓이 계산 */
+           
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%; /* 테이블 넓이를 부모 요소의 넓이에 맞춤 */
+        }
+        td {
+            border: 2px solid #ddd;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        td:hover {
+            background-color: #f0f0f0;
+        }
+</style>
+<script type="text/javascript">
+ window.onload = () =>{
+
+	 document.querySelectorAll("td").forEach((btn)=> {
+	 	btn.onclick = () => {
+		 let btnValue = btn.innerText;
+		 let result = document.querySelector(".calculator-result");
+		 switch (btnValue) {
+	        case "지우기":
+	           //계산기의 결과 영역을 '0'으로 초기화
+	            result.innerText = "0";
+	            break;
+	        case "←":
+	           //결과 영역의 마지막 숫자를 삭제
+	           	result.innerText = result.innerText.slice(0, -1) || "0";
+	            break;
+	        
+	        case "=":
+	        	// 안전한 계산을 위해 eval 대신 Function 생성자 사용
+                try {
+                    result.innerText = new Function("return " + result.innerText)();
+                } catch(e) {
+                    result.innerText = "Error";
+                }
+                break;
+	        	
+	        default:
+	            // 기본 동작: 클릭된 값을 결과 영역에 추가
+	            
+	            if (result.innerText === "0") {// 초기값이 '0'인 경우, 값을 대체
+                        result.innerText = btnValue;
+                    } else {// 그 외의 경우, 값을 누적
+                        result.innerText += btnValue;
+                    }
+                    break;
+	            
+	    }
+		
+	 	}
+	 });
+ }
+
+</script>
+</head>
+<body>
+<div class = "calculator-container">
+<h2 style = "text-align : center;">계산기</h2>
+<div class = "calculator-result">0</div>
+<table id="calculator">
+		<tr>
+			<td>7</td>
+			<td>8</td>
+			<td>9</td>
+			<td>*</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>5</td>
+			<td>6</td>
+			<td>/</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>+</td>
+		</tr>
+		<tr>
+			<td>0</td>
+			<td>=</td>
+			<td>.</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td colspan="3">지우기</td>
+			<td>←</td>
+		</tr>
+	</table>
+</div>
+	
+
+
+</body>
+</html>

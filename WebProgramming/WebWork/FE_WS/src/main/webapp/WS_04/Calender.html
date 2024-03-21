@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Simple Calendar</title>
+<style>
+    table { width: 100%; }
+    th, td { width: 14%; text-align: center; }
+    .today { color: red; }
+</style>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>일</th>
+        <th>월</th>
+        <th>화</th>
+        <th>수</th>
+        <th>목</th>
+        <th>금</th>
+        <th>토</th>
+    </tr>
+    <script>
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth();
+        const firstDay = new Date(year, month, 1).getDay();
+        const lastDay = new Date(year, month + 1, 0).getDate();
+
+        const weeks = Math.ceil((firstDay + lastDay) / 7);
+        let date = 1;
+        let start = 0;
+
+        for(let row = 0; row < weeks; row++) {
+            document.write('<tr>');
+            for(let col = 0; col < 7; col++) {
+                if(row === 0 && start < firstDay) {
+                    document.write('<td>★</td>'); // 첫 주에서 1일 전까지
+                    start++;
+                } else if(date > lastDay) {
+                    document.write('<td>※</td>'); // 마지막 날 이후
+                } else {
+                    if(date === today.getDate()) {
+                        document.write('<td class="today">' + date + '</td>'); // 오늘 날짜
+                    } else {
+                        document.write('<td>' + date + '</td>'); // 나머지 날짜
+                    }
+                    date++;
+                }
+            }
+            document.write('</tr>');
+        }
+    </script>
+</table>
+</body>
+</html>

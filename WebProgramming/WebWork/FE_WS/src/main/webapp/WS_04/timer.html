@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Timer Example</title>
+<script type="text/javascript">
+    let timerId = null; // 타이머 ID를 저장할 변수
+
+    window.onload = function() {
+        document.querySelector("[value=시작]").onclick = ()=>{
+            if (timerId !== null) return; // 타이머가 이미 실행 중이면 시작하지 않음
+            timerId = setInterval(() => {
+                const today = new Date();
+
+                let hours = today.getHours();
+                const minutes = today.getMinutes();
+                const seconds = today.getSeconds();
+
+                const ampm = hours >= 12 ? "PM" : "AM";
+                hours = hours % 12; //나머지 연산을 통해 12시간제로 변경.
+                hours = hours ? hours : 12; // 자바스크립트에서 0은 false로 간주되므로 0시를 12시로 변경.
+
+                const strHours = (hours < 10 ? "0" : "") + hours;
+                const strMinutes = (minutes < 10 ? "0" : "") + minutes;
+                const strSeconds = (seconds < 10 ? "0" : "") + seconds;
+
+                document.getElementById("time").value = `${ampm} ${strHours} : ${strMinutes} : ${strSeconds}`;
+            }, 1000);
+        };
+
+        document.querySelector("[value=중지]").onclick = ()=>{
+            if (timerId !== null) {
+                clearInterval(timerId);
+                timerId = null;
+            }
+        };
+    }
+</script>
+</head>
+<body>
+    <form name="f">
+        <input type="text" name="time" id="time"> 
+        <input type="button" value="시작"> 
+        <input type="button" value="중지">
+    </form>
+</body>
+</html>

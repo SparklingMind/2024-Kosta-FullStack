@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>New Document</title>
+<meta charset="utf-8">
+
+<style>
+img {
+    position: absolute;
+    left: 0;
+}
+</style>
+
+<script type="text/javascript">
+window.onload = () => {
+    let img = document.getElementById("img");
+    let intervalId = null;
+    let i = 0; // 이미지를 움직이게 할 위치 변수
+    let direction = 1; // 이동 방향을 제어할 변수 (1: 오른쪽, -1: 왼쪽)
+
+    const images = [
+        "img/cat.gif",
+        "img/dog.gif",
+        "img/lion.gif",
+        "img/monkey.gif"
+    ];
+    let currentImageIndex = 0; // 현재 이미지 인덱스
+    img.src = images[currentImageIndex];
+
+    const moveImg = document.querySelector("[value=레이어움직이기]");
+    moveImg.onclick = () => {
+        let windowWidth = window.innerWidth; // 브라우저 창의 너비
+        if (intervalId === null) {
+            intervalId = setInterval(() => {
+            	let rect = img.getBoundingClientRect();	//getBoundgingClientRect :  DOM 요소의 위치와 크기에 대한 정보를 제공
+            	let isAtRightEnd = rect.right >= window.innerWidth;
+            	let isAtLeftEnd = rect.left <= 0;
+
+            	if (isAtRightEnd || isAtLeftEnd) {
+            	    if (isAtRightEnd && direction === 1) { // 화면 오른쪽 끝에 도달했고, 현재 오른쪽으로 이동 중일 때만
+            	        direction = -1; // 방향을 왼쪽으로 변경
+            	        currentImageIndex = (currentImageIndex + 1) % images.length;
+            	        img.src = images[currentImageIndex];
+            	    } else if (isAtLeftEnd && direction === -1) { // 화면 왼쪽 끝에 도달했고, 현재 왼쪽으로 이동 중일 때만
+            	        direction = 1; // 방향을 오른쪽으로 변경
+            	        currentImageIndex = (currentImageIndex + 1) % images.length;
+            	        img.src = images[currentImageIndex];
+            	    }
+            	} else {
+            	    i += direction;
+            	    img.style.left = i + "px";
+            	}
+
+                i += direction;
+                img.style.left = i + "px";
+            }, 3);
+        } else {
+            alert("이미 움직이기가 실행 중입니다.");
+        }
+    };
+
+    const stopImg = document.querySelector("[value=레이어멈추기]");
+    stopImg.onclick = () => {
+        if (intervalId !== null) {
+            clearInterval(intervalId);
+            intervalId = null;
+        }
+    };
+};
+</script>
+</head>
+
+<body>
+	<form>
+		<input type="button" value="레이어움직이기" /> <input type="button" value="레이어멈추기" />
+	</form>
+	<p>
+		<img id="img" alt="움직이는 이미지" />
+	</p>
+</body>
+</html>
+

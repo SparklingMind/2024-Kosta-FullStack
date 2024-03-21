@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>New Document</title>
+<meta charset="UTF-8">
+<script type="text/javascript">
+window.onload = () => {
+    document.querySelector("[value='계산하기']").onclick = () => {
+        let v = document.querySelector("[name=cal]").value;
+      //document.querySelector("[name=result]").value = eval(v);	//eval을 사용해 string 타입인 v를 자바스크립트 표현식으로 변경했다.
+		
+		///eval() 함수 대신에 new function()을 사용해보자. 
+		//new Function(매개변수1,매개변수2,.....,함수내용)
+        let func = new Function("return " + v);
+        document.querySelector("[name=result]").value = func();
+    };
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector("#btn1").onclick = () => {
+        for (let i = 1; i <= 5; i++) {
+            let re = eval("document.f.t" + i);
+            alert(re.name + " = " + re.value);
+        }
+    };
+});
+</script>
+</head>
+
+<body>
+<form name="f">
+    식 :<input type="text" name="cal"/>
+    결과 : <input type="text" name="result" />
+    <input type="button" value="계산하기" />
+
+    <hr>
+
+    <input type="text" name="t1" />
+    <input type="text" name="t2" />
+    <input type="text" name="t3" />
+    <input type="text" name="t4" />
+    <input type="text" name="t5" />
+
+    <p>
+    <input type="button" id="btn1" value="text입력값 가져오기(eval())" />
+    <input type="button" id="btn2" value="text입력값 가져오기(new Function())" />
+</form>
+</body>
+</html>
