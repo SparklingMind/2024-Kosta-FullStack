@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Object 만들기</title>
+
+<script type="text/javascript">
+	//사원 객체
+	const Emp = {
+		empno : 10,
+		ename : "heejung",
+		job : "teacher",
+		message : function() {
+			return "반가워요";
+		},
+		dept : {
+			dname : "IT",
+			deptno : 100,
+
+		}
+	}
+
+	document.write("<h3>");
+	document.write(`Emp = ${Emp} / ${Emp.empno} / ${Emp.ename}<br>`);
+	console.log(Emp);
+
+	const result = Emp.message(); //함수호출하면서 return타입 반환하여 result에 저장
+
+	console.log("result = " + result);
+	console.log(Emp.dept.dname);
+
+	////////////////////////////////////////////////////////////////
+	//for in을 이용해서 key를 찾고 value 출력하기
+	for ( let property in Emp) {
+		console.log(property + "=" + Emp[property]);
+	}
+
+	console.log("----------------Emp.dept-------------------")
+	for ( let key in Emp.dept) {
+		console.log(key + "=" + Emp.dept[key]);
+	}
+	//////////////////////////////////////////////////////////////////////
+	const arr = [ "A", "B", "C" ];
+	for ( let i in arr) {
+		console.log(i); //arr의 value가 아니라 인덱스 값이 출력된다.
+		console.log(arr[i]); //arr의 value를 출력하려면 이와 같이 사용. 이와 같은 특성 때문에 in은 배열에는 잘 사용되지 않는다.
+	}
+	document.write("</h3>");
+
+	////key와 value가 이름이 같은 경우
+	let name = "아리";
+	let age = 20;
+	let addr = "서울";
+
+	/* const student = {
+			name : name,
+			age : age,
+			addr : addr
+	} */
+
+	const student = {	//위의 코드를 이와 같이 생략이 가능하다. ES6에서 추가된 문법으로 자주 사용된다.
+		name,
+		age,
+		addr 
+	}
+	console.log(student.name + " | " + student.age + " | " + student['addr']);
+</script>
+</head>
+<body>
+	<h2>Object 만들기</h2>
+</body>
+</html>

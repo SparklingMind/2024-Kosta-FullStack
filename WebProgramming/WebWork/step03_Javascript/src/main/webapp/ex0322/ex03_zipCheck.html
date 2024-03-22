@@ -1,0 +1,58 @@
+<!DOCTYPE HTML >
+<html >
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>New Web Project</title>
+		
+		<script type="text/javascript">
+			window.onload = () => {
+				//이벤트 등록
+				document.querySelector("#zipcode").onchange = (e) =>{
+					//현재 선택된 value를 조회
+					let address = e.target.value;
+					console.log(address);
+					//우편번호 3, 3, 나머지 주소 분리해서
+					let zip1 = address.substring(0,3);
+					let zip2 = address.substring(4,7);
+					detail_Address = address.substring(8);
+					
+					//부모창에 넣기
+					
+					opener.document.member.zip1.value = zip1;
+					opener.document.member.zip2.value = zip2;
+					opener.document.member.addr.value = detail_Address;
+					
+					
+					//현재 창 닫기
+					self.close();
+					
+				}
+			}
+		
+		</script>
+	</head>
+	<body>
+	  
+	  <form name="f">
+	  	우편번호 
+	  	<select id = "zipcode">
+	  	  <option value="0">-- 주소 선택 --</option>	
+	  	  <option value="123-333 서울시 구로구 구로1동">
+	  	  	123-333 서울시 구로구 구로1동
+	  	  </option>
+	  	  <option value="222-222 서울시 청담동 청담3동">
+	  	  	222-222 서울시 청담동 청담3동
+	  	  </option>
+	  	  <option value="444-444 부산시 대구동 대로2동">
+	  	  	444-444 부산시 대구동 대로2동
+	  	  </option>
+	  	  <option value="555-221 경기도 성남시 분당구 분당1동">
+	  	  	555-221 경기도 성남시 분당구 분당1동
+	  	  </option>
+	  	</select>
+	  	
+	  </form>	
+	
+	</body>
+</html>
+

@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>New Web Project</title>
+	<!-- 
+		부모창으로부터 전달된 id를 받아야한다.
+		하지만 html은 그런 기능이 없다.
+		즉, html, css, javascript 는 데이터를 전송하는 것까지 할 수 있지만,
+		전송된 곳에서 그 값을 받아서 처리하는 능력이 없다. 결국 backend언어(jsp&servlet)가 필요하다. - request.getParameter("id)
+	 -->
+	
+	<style type="text/css">
+		tr th{background-color:pink}
+		td,th{padding:3px}
+		
+	</style>
+		
+	<script type="text/javascript">
+	window.onload = ()=>{
+		//이벤트 등록
+		
+		document.querySelector("[value=IDCheck]").onclick = () =>{
+			//id박스에 값유무체크
+			 window.open("ex01_idCheck.html","idwin","width=400","height=300");
+			let idV = document.getElementById("id");
+			if(idV.value===""){
+				alert("아이디를 입력해주세요.");
+				idV.focus();
+				return;
+			}
+			//get? post?
+			window.open("ex01_idCheck.html?id="+idEle.value , "idwin", "width=400" , "height=300");
+		}
+		
+		//우편번호 검색
+		document.getElementById("zip").onclick = () =>{
+			window.open("ex03_zipCheck.html", "zipwin", "width=400","height=300");
+		}
+	}
+		
+		
+	
+	</script>
+	
+	</head>
+	<body>
+		<h1>[ 회원 가입 ]</h1>
+		<form name="member">
+		<table>
+			<tr>
+				<th>ID</th>
+				<td>
+					<input type="text" name="id"  id="id"/>
+					<input type="button" value="IDCheck" />
+				</td>
+			</tr>
+			<tr>
+				<th>우편번호</th>
+				<td>
+				  <input type="text" name="zip1" size="3" /> - 
+				  <input type="text" name="zip2" size="3" />	
+				  <input type="button" value="우편번호검색" id="zip" />
+				</td>
+			</tr>
+			<tr>
+				<th>주소</th>
+				<td><input type="text" size="30" name="addr" /></td>
+			</tr>				
+		</table>
+	</form>
+	</body>
+</html>
+

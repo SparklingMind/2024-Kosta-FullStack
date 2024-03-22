@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Array 관련 함수</title>
+</head>
+<body>
+	<h1>Array 관련 함수</h1>
+	<script type="text/javascript">
+console.log("-----1. slice() : 배열의 일부분을 잘라서 하나의 배열로 만들어준다.---------------------------------");
+const a = [1,2,3,4,5];
+const b = a.slice(1,3); //index 1부터 3의 전까지 잘라서 새로운 배열을 만들어준다.
+
+console.log(a);
+console.log(b);
+
+
+console.log("----------------------2. concat() : 두 개의 배열을 하나의 배열로 합친다. -----------------------");
+const c = a.concat(b); //a배열과 b배열을 합쳐서 새로운 배열을 만들어준다.
+console.log(c);
+
+console.log("---------------------3.join() : 배열을 하나의 string으로 만들어 준다.-----------------");
+const d = a.join(); 	//인자에 아무것도 넣지 않으면 ,로 구분된다.
+console.log(d);
+const e = a.join("or"); //or로 구분된다.
+console.log(e);
+
+console.log("---------------------3.reverse() : 배열을 뒤집어서 배열로 만들어준다.-----------------");
+const f = a.reverse();
+console.log(f);
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+const student = [	//객체 배열을 하나씩 꺼낼 때는 for-each문을 많이 사용한다.
+		{name:"A", age : 20, state:true, score:90},
+		{name:"B", age : 20, state:true, score:45},
+		{name:"C", age : 20, state:true, score:82},
+		{name:"D", age : 20, state:true, score:70},
+]
+
+const students = [	//객체 배열을 하나씩 꺼낼 때는 for-each문을 많이 사용한다.
+	{name:"A", age : 20, state:true, score:90},
+	{name:"B", age : 20, state:true, score:45},
+	{name:"C", age : 20, state:true, score:82},
+	{name:"D", age : 20, state:true, score:70},
+]
+
+console.log("-----모든 학생 정보 출력----------");
+students.forEach((student, i)=>console.log(student + " = " + student.name));
+
+//1. 점수가 90점인 학생 정보 - find()
+console.log("1. 점수가 90점인 학생 정보:", students.find(student => student.score === 90));
+
+//2. 점수가 90점 이상인 모든 학생 - filter()
+console.log("2. 점수가 90점 이상인 모든 학생:", students.filter(student => student.score >= 80));
+
+//3. 수강 중(state-true) 학생들만 골라서 배열로 만들기 - filter()
+console.log("3. 수강 중인 학생들:", students.filter(student => student.state === true));
+
+//4. 학생 배열에서 점수만 뽑아서 배열로 만들기 - map()
+console.log("4. 학생들의 점수:", students.map(student => student.score));
+
+//5. 학생들 중에 점수가 50점 보다 낮은 학생이 있는지 검사 - some()
+console.log("5. 점수가 50점 보다 낮은 학생이 있는가:", students.some(student => student.score < 50));
+
+//6. 모든 학생들의 점수가 80이상인지 검사 - every()
+console.log("6. 모든 학생의 점수가 80이상인가:", students.every(student => student.score >= 80));
+
+//7. 학생들의 평균 점수 구하기 - reduce()
+console.log("7. 학생들의 평균 점수:", students.reduce((acc, curr) => acc + curr.score, 0) / students.length);
+
+//8. 학생들의 모든 점수를 하나의 문자열로 변환 - map() & join()
+console.log("8. 모든 점수를 문자열로 변환:", students.map(student => student.score).join(", "));
+
+//9. 점수가 50점 이상인 학생들만 뽑아서 하나의 문자열로 변환 - map(), filter(), join()
+console.log("9. 50점 이상인 학생들의 점수를 문자열로:", students.map(student => student.score).filter(score => score >= 50).join(", "));
+
+//10. 학생들의 점수를 정렬하기 - sort()
+console.log("10. 점수 정렬:", students.map(student => student.score).sort((a, b) => a - b));
+
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript">
+	window.onload = () => {
+		document.querySelectorAll("a").forEach((item)=>{
+			
+			//주소 변경 : loacation.href 사용
+			
+			item.onclick = () => {
+				opener.location.href = item.getAttribute("data-url");
+			}
+		})
+	}
+</script>
+</head>
+<body>
+ <a href="#" data-url = "https://naver.com" >네이버</a> <p>
+ <a href="#" data-url = "https:/daum.net">다음</a> <p>
+ <a href="#" data-url = "https://kosta.or.kr">코스타</a> <p>
+</body>
+</html>
