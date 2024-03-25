@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style type="text/css">
+img {
+	left: 200px;
+	top: 100px;
+	position: absolute;
+}
+</style>
+<script type="text/javascript">
+ 
+ window.onload = () => {
+	
+	 document.addEventListener('mousemove',check);
+	 
+	 
+	 function check(event) {
+		  let img = document.getElementById("img");
+		  img.style.left = (event.clientX + 10) + 'px';
+		  img.style.top = (event.clientY + 10) + 'px';
+	  }
+ }  
+
+</script>
+</head>
+<body>
+	<img src="img/cat.gif" id ="img">
+
+</body>
+</html>

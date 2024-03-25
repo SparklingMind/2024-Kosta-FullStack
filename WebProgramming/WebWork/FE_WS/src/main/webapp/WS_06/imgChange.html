@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript">
+  let imgName=["img/cat.gif","img/lion.gif","img/monkey.gif","img/dog.gif"];
+  let i = 0;
+  let intervalId = null;
+  let img;
+  window.onload = () =>{
+	  img = document.getElementById("img");
+	  console.log(img);
+	  
+	  imgChange();
+	  
+	  img.addEventListener('mouseover', () => {
+		  clearInterval(intervalId);
+	  })
+	  
+	  img.addEventListener('mouseout',() =>{
+		  imgChange();
+	  })
+  }
+  
+  function imgChange() {
+	  intervalId = setInterval(()=>{
+		  img.src = imgName[i++ % imgName.length]; 
+	  },1000);
+  }
+</script>
+</head>
+<body >
+<img id="img">
+</body>
+</html>

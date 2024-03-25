@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>tableCreate</title>
+<style type="text/css">
+  body {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-color: #f4f7f6;
+  }
+
+  table {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #48a9a6;
+    color: white;
+  }
+
+  a#add {
+    display: inline-block;
+    background-color: #48a9a6;
+    color: white;
+    padding: 10px 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  input[type="text"] {
+    border: 1px solid #ddd;
+    padding: 6px 10px;
+    border-radius: 4px;
+    width: calc(100% - 24px); /* Adjust input width considering padding and border */
+  }
+
+  input[type="button"] {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type="button"]:hover {
+    background-color: #c0392b;
+  }
+</style>
+
+<script type="text/javascript">
+ var age=0;
+ function createRow(){
+	 var tb = document.getElementById("table");
+	 //alert("tb.rows.length : " + tb.rows.length);
+	 //행생성
+	 var row = tb.insertRow(tb.rows.length);//<tr>
+	 
+	 //행에 td 추가
+	 
+	/* row.insertCell(0).innerHTML="<input type='text' name='name' value='장희정'/>"
+	 row.insertCell(1).innerHTML="<input type='text' value='"+ age++ +"'/>"
+	 row.insertCell(2).innerHTML="<input type='button' value='삭제' onclick='del(this)'/>";
+	*/
+	
+	 var cellLen = tb.rows[0].cells.length;//0행의 길이
+	// alert("cellLen = " + cellLen);
+	 
+	 for(i=0; i < cellLen ; i++){//각행의 열의 길이만큼
+		var cell =  row.insertCell(i);//<td></td>
+	    switch(i){
+	       case 0: //첫번열인경우 
+	       cell.innerHTML="<input type='text' name='name' value='장희정'/>"; 
+	       
+	       break; 
+	       case 1://2번째 열인경우
+	       cell.innerHTML="<input type='text' value='"+ age++ +"'/>"; 
+	       
+	       break;
+	       case 2:  
+	       cell.innerHTML="<input type='button' value='삭제' onclick='del(this)'/>"; 
+	       break;
+	    }
+	 } 
+
+	
+	
+ }//생성끝
+ 
+ 
+ function del(th){//버튼객체..
+	
+	 
+	 let tr = th.parentNode.parentNode; //button->td->tr
+	 //tr삭제
+	 tr.parentNode.removeChild(tr) ;
+	
+	// th.parentNode.parentNode.removeChild(th.parentNode);
+	 
+ }
+
+ 
+ 
+ //이벤트등록
+ onload = function(){
+	 document.getElementById("add").onclick = createRow; //
+ }
+</script>
+
+
+
+
+</head>
+<body >
+<h1>테이블 동적으로 생성하기 </h1>
+<a href="#" id="add"  >추가하기</a>
+
+<table id="table">
+ <tr>
+   <th>이름</th>
+   <th>나이</th>
+   <th>삭제하기</th>
+ </tr>
+ <!-- 동적으로 tr 추가 또는 제거  -->
+</table>
+
+</body>
+</html>

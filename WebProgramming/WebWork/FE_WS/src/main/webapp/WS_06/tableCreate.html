@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style type="text/css">
+h1 {
+	text-align: center;
+}
+
+table {
+	width: 400px;
+	margin: 0 auto;
+	border-collapse: collapse;  /*border-collapse :  테이블의 테두리를 합침 */
+}
+
+th, td {
+	padding: 8px;
+	border-bottom: 1px solid #ddd;
+	text-align: center;
+}
+
+th {
+	background-color: darkgrey;
+	color: white;
+}
+
+a#add {
+	display: block;
+	background-color: darkgrey;
+	width: 100px;
+	color: white;
+	padding: 10px 20px;
+	margin: 20px auto;
+	border-radius: 5px;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 5px;
+	color: white;
+}
+
+a#add:hover {
+	background-color: black;
+}
+
+input[type="text"] {
+	border: 1px solid #ddd;
+	padding: 6px 10px;
+	border-radius: 4px;
+}
+
+input[type="button"] {
+	background-color: darkgrey;
+	color: white;
+	border: none;
+	padding: 6px 10px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+input[type="button"]:hover {
+	background-color: black;
+}
+</style>
+<script type="text/javascript">
+let age = 0;
+function createRow(){
+	let tb = document.getElementById("table");
+	let row = tb.insertRow(tb.rows.length);
+	
+	let cellLength = tb.rows[0].cells.length;	//각 행의 열의 길이
+	
+
+	for(i=0; i < cellLength ; i++){
+		let cell = row.insertCell(i);	//각 행의 열마다 그에 맞는 값을 넣어줌.
+		switch(i){
+		case 0 :
+			cell.innerHTML = "<input type = 'text' name = 'name' value = '이가은' />";
+			break;
+		case 1: 
+			cell.innerHTML = "<input type = 'text' value = '"+ age++ +"'/>";
+			break;
+		case 2:
+			cell.innerHTML = "<input type = 'button' value = '삭제' onclick = 'del(this)'/>";
+			break;
+		
+		}
+	}
+}
+
+function del(th){
+	let tr = th.parentNode.parentNode;
+	tr.parentNode.removeChild(tr);
+} 
+
+window.onload = function(){
+	document.getElementById("add").onclick = createRow;
+}
+
+
+</script>
+
+
+
+
+</head>
+<body>
+	<h1>
+		<테이블 동적으로 생성하기>
+	</h1>
+	<a href="#" id="add">추가하기</a>
+
+	<table id="table">
+		<tr>
+			<th>이름</th>
+			<th>나이</th>
+			<th>삭제하기</th>
+		</tr>
+		<!-- 동적으로 tr 추가 또는 제거  -->
+	</table>
+
+</body>
+</html>

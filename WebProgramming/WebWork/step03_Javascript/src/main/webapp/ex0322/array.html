@@ -56,16 +56,16 @@ console.log("2. 점수가 90점 이상인 모든 학생:", students.filter(student => stude
 
 //3. 수강 중(state-true) 학생들만 골라서 배열로 만들기 - filter()
 console.log("3. 수강 중인 학생들:", students.filter(student => student.state === true));
-
+console.log(students.filter(student => student.state ===true));
 //4. 학생 배열에서 점수만 뽑아서 배열로 만들기 - map()
 console.log("4. 학생들의 점수:", students.map(student => student.score));
-
+console.log(students.map(student => student.score)) ; 
 //5. 학생들 중에 점수가 50점 보다 낮은 학생이 있는지 검사 - some()
 console.log("5. 점수가 50점 보다 낮은 학생이 있는가:", students.some(student => student.score < 50));
-
+console.log(students.some(student=>student.score <50));
 //6. 모든 학생들의 점수가 80이상인지 검사 - every()
 console.log("6. 모든 학생의 점수가 80이상인가:", students.every(student => student.score >= 80));
-
+console.log(students.every(student=>student.score >= 80));
 //7. 학생들의 평균 점수 구하기 - reduce()
 console.log("7. 학생들의 평균 점수:", students.reduce((acc, curr) => acc + curr.score, 0) / students.length);
 
