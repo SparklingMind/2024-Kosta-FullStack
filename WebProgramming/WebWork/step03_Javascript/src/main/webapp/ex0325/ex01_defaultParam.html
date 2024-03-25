@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>default Params</title>
+</head>
+<body>
+<h2>default Params</h2>
+<script type="text/javascript">
+function test(name = "guest", age = 0){	//자바스크립트는 인자수가 맞지 않아도 호출이 가능하다. 여기서는 인자가 없을 시에 기본값을 지정해줬다.
+	console.log(name);
+	console.log(age);
+	
+}
+	test("희정");
+	test();
+	test("희정",20);
+
+</script>
+</body>
+</html>

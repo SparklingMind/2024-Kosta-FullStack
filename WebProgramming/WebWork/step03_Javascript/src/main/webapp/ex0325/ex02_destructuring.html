@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Destructoring - 구조분해할당</h2>
+<script type="text/javascript">
+	const emp = {empno : 100, ename : "hee", job : "teacher"}; //객체
+	
+	/* const empno = emp.empno;
+	const ename = emp.empno;
+	const job = emp.job;
+	
+	console.log(empno+ " | " + ename + " | " + job); */	//객체의 속성을 하나하나 변수에 지정해주는 게 불편하다!
+	
+	///////////객체의 속성을 한 번에 변수에 할당////////////////////////////////////////////////////
+	{
+	const {empno, ename, job} = emp;	//emp객체의 key와 동일한 이름 변수로 선언.
+	
+	console.log(empno+ " | " + ename + " | " + job);
+	}
+	///////선언하는 변수 이름을 다르게 하고 싶다.////////////////////////////////////////////////////////
+	{
+	const {empno:no, ename:name, job} = emp;	//emp객체의 key와 동일한 이름 변수로 선언.
+	
+	console.log(no+ " | " + name + " | " + job);
+	}
+	/////////////////배열에서 사용해보자///////////////////////////////////////////
+	{
+		const jobs = ["학생","강사"];
+		const first = jobs[0];
+		const second = jobs[1];
+		
+		console.log(first + "|"+ second);
+	}
+	//////////////////위 형식을 구조분해할당으로 변경해보자/////////////////////
+	{
+		const jobs = ["학생","강사"];	
+		const [first, second] = jobs;	//배열의 순서대로 각각 first와 second에 할당됨.
+		
+		console.log(first + "|" + second);
+		
+		
+	}
+	
+</script>
+</body>
+</html>

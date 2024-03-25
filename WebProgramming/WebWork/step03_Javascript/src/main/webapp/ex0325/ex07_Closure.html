@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Closure 개념</h2>
+<script type="text/javascript">
+	function test(x){
+		console.log("x = " + x);
+		
+		return function(y) {
+			return x+y;
+		};
+	}
+	////////////////////////////////////////////////////////
+	console.log("-----------------------------------------");
+	const re1 = test(2);
+	const innerRe = re1(3);
+	
+	console.log("innerRe = " + innerRe);
+	
+	console.log("----------------------------------------");
+	const re2 = test(20);
+	const re3 = test(30);
+	const re4 = test(40);
+	console.log("----------------------------------------");
+	
+	const innerRe4 = re4(1); //41
+	const innerRe3 = re3(1); //31
+	const innerRe2 = re2(1); //21
+	
+	console.log("innerRe4 = " + innerRe4);
+	console.log("innerRe3 = " + innerRe3);
+	console.log("innerRe2 = " + innerRe2);
+	
+</script>
+</body>
+</html>

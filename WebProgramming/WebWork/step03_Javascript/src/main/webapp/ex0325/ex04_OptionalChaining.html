@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Optional Chaining</title>
+</head>
+<body>
+<h3>Optional Chaining</h3>
+<!-- 
+	중첩된 객체에서 존재하지 않는 특정 속성(property)를 조회할 때,
+	오류없이 undefined를 반환하고 그냥 넘어갈 수 있게 한다.
+ -->
+ <script type="text/javascript">
+ 	const person1 = {
+ 			name : "ahn",
+ 			job : {
+ 				title:"teacher",
+ 				manager : {
+ 					name : "chan"
+ 				}
+ 			}
+ 	}
+ 
+ 	const person2 = {
+ 			name : "jang",
+ 			
+ 	}
+ 	
+ 	//함수
+ 	function print(person){
+ 		//매니저의 이름을 알고 싶다.
+ 		
+ 		/* if(person){
+ 			if(person.job){
+ 				if(person.job.manager){
+ 					console.log(person.job.manager.name);	//person값이 존재하면, person.job을 체크하고, person.job값이 존재하면.... -> optional chaining으로 바꿔주자.
+ 				}
+ 			}
+ 		} */
+ 		
+ 		console.log(person.job?.manager?.name);	//optional chaining으로 위의 조건문을 간단히 표현 가능하다.
+ 	}
+ 	
+ 	//함수 호출해보자
+ 	print(person1);	//chan
+ 	print(person2);	//undefined
+ 	
+ 	
+ </script>
+</body>
+</html>

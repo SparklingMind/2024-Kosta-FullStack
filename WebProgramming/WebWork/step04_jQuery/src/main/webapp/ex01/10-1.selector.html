@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.7.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	//$("*").css("color","red");
+	//$("li").css("font-family","궁서체");
+	$("li").css("fontFamily","궁서체");	//css와 자바스크립트에서 케밥표기법과 카멜표기법이 다르기 때문에 혼란이 있었는데, jquery에서는 어떤 표기법 써도 가능하다.
+	
+	//h3과 h4태그에 css 적용
+	$("h3,h4").css("border","red solid 5px");
+	
+	//한 번에 여러 개의 css 적용하기. - 메소드 체인방법
+	$("h3").css("border","red solid 5px").css("backgroundColor","pink").css("color","blue"); 
+	
+	//한 번에 여러 개 css 적용하고 싶다. - {속성 : value, 속성 : value}
+	$("h4").css({
+		color : "purple", border : "3px double yellow", fontSize : "30px"
+	})
+	
+});
+</script>
+
+</head>
+<body>
+	
+<h3>jQuery 기본 selector</h3>
+<h4>웹 프로그래밍</h4>
+<div class="div">
+	<ol>
+     	<li>jsp</li>
+		<li id="tag">javaScript</li>
+		<li>jQuery</li>
+		<li>Ajax</li>
+	</ol>
+</div>
+	
+
+</body>
+</html>

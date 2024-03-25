@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>Spread 연산자</h2>
+	<script type="text/javascript">
+{
+	const arr1 = [1,2,3];
+	
+	const arr2 = arr1;	//arr1의 주소를 arr2에 넣음(깊은 복사)
+	
+	arr2.push(4);	
+	
+	console.log("arr1 = " + arr1); //1,2,3,4
+	console.log("arr2 = " + arr2); //1,2,3,4
+}
+	////////////////////////////////////////
+{
+	const arr1 = [1,2,3];
+	
+	const arr2 = [...arr1];	//arr1의 데이터를 복사해서 arr2에 넣음(얕은 복사)
+	
+	console.log("arr1 = " + arr1); //1,2,3
+	console.log("arr2 = " + arr2); //1,2,3
+	
+	arr2.push(4);
+	
+	console.log("arr1 = " + arr1); //1,2,3
+	console.log("arr2 = " + arr2); //1,2,3,4
+}
+	
+	////배열 안에 객체가 있는 경우////////
+	console.log("===========");
+	{
+		const arr1 = [{name : "은정" , age: 20}, {name : "수아", age : 25}];
+		const arr2 = [...arr1]; 
+		
+		arr2[0].name = "나영";	//arr1에도 들어감 (주소값 같기 때문)
+		arr2.push(50);	//arr1에는 들어가지 않음
+		console.log(arr1);
+		console.log(arr2);
+		
+	}
+	
+	///////////배열이 아닌 Object도 복사 해보자 //////////////////
+	{
+		const obj1 = {name:"아영", age:30};
+		const obj2 = {...obj1};
+		
+		obj2.name = "영민";
+		
+		console.log(obj1); //{name: '아영', age: 30}
+
+		console.log(obj2); //{name: '영민', age: 30}
+		
+	}
+	/////////////복사만 하지 않고 다른 요소도 넣어보자///////////////////////////////////////////////
+	{
+		const arr1 = [10,20,30];
+		const arr2 = [0,5,...arr1,40,50];
+		
+		console.log(arr1);	//[10, 20, 30]
+		console.log(arr2); //[0, 5, 10, 20, 30, 40, 50]
+	}
+	
+	
+</script>
+</body>
+</html>

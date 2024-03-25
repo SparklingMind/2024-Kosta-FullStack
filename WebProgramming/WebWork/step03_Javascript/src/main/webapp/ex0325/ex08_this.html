@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>this : 호출한 주체에 의해 결정된다!!! </h3>
+<script type="text/javascript">
+	window.onload = function(){
+		const student = {
+				name : "hoon",
+				print : function(){
+					console.log(this);
+					console.log(this.name);
+					console.log(event.target);
+					
+					console.log("----------------------")
+					
+				} //studentEnd
+		
+		}
+		
+		//print를 호출해보자.
+		student.print();	//student가 호출. 여기서 this는 student
+		
+		console.log("=======함수를 변수에 담아서 호출해보자============");
+		const myPrint = student.print;
+		
+		//호출
+		myPrint(); //window가 호출. 여기서 this는 window
+		
+		console.log("=======이벤트 등록============");
+		document.getElementById("btn1").onclick = student.print; //여기서 this는 btn1
+		document.getElementById("btn2").onclick = myPrint; //여기서 this는 btn2
+		
+		document.getElementById("btn3").onclick = function(){
+			console.log(this);	//btn3
+			console.log(event.target);	//btn3
+		};
+		
+		document.getElementById("btn4").onclick = () => {
+			console.log(this);	//!!window!! why? -> 화살표함수는 무조건 윈도우 객체가 호출한다.
+			console.log(event.target);	//btn4
+		};
+		
+	}//loadEnd
+	
+	
+	
+	
+</script>
+
+<script>
+	//jquery의 기본 골격
+	$(document).ready(function(){
+		//jQuery를 작성한다.
+		
+		//javascript 문법은 사용 가능? -> 가능하다.
+				
+		$("h3").text("안녕"); //$표시가 있는 jquery문 안에서는 jQuery에서 제공하는 함수와 속성을 사용해야 한다.
+		document.querySelector("h3").innerText = "안녕";
+	})
+	
+	///축약형
+	$(function(){	// $(document).ready(function(){})와 같다.
+		
+	})
+</script>
+<button id = "btn1"> 버튼 1 </button>
+<button id = "btn2"> 버튼 2 </button>
+<button id = "btn3"> 버튼 3 </button>
+<button id = "btn4"> 버튼 4 </button>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Nullish</title>
+</head>
+<body>
+<h3>Nullish</h3>
+<script type="text/javascript">
+	//자바스크립트는
+	//false, 0, null, undefined, NaN, '' => 모두 false로 이해.
+	//편리하지만 불편할 수도 있다.
+	
+	{
+		const name = "chan";
+		const userName = name || "Guest";
+		
+		console.log(userName);
+	}
+	
+	{
+		const name = "";
+		const userName = name || "Guest";
+		
+		console.log(userName);	//Guest
+	}
+	
+	{
+		const name = 0;
+		const userName = name || "Guest";
+		
+		console.log(userName);	//Guest
+	}
+	
+	////Nullish 적용 - null이거나 undefined인 경우에만 false로 인식
+	
+	{
+		const name = "chan";
+		const userName = name ?? "Guest";
+		
+		console.log(userName);
+	}
+	
+	{
+		const name = "";
+		const userName = name ?? "Guest";
+		
+		console.log(userName);	//""
+	}
+	
+	{
+		const name = 0;
+		const userName = name ?? "Guest";
+		
+		console.log(userName);	//0
+	}
+	
+
+</script>
+</body>
+</html>
