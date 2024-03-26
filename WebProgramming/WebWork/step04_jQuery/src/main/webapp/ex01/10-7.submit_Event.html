@@ -5,7 +5,38 @@
 <title>Insert title here</title>
 
 <script src="../js/jquery-3.6.1.min.js"></script>
-
+<script type="text/javascript">
+ $(function(){
+	 
+	 $("#form").submit(function(){
+		 //id와 pwd에 값이 있는지 체크하고 없으면 메시지 출력, 커서놓기, 이동막음
+		 //alert(1)
+		 let v = $("#id").val(); 
+		// alert(v)
+		if(v ===""){
+			alert("아이디 입력해.");
+			$("#id").focus();
+			return false;//전송막음.
+		}
+		
+		if($("#pwd").val()===""){
+			alert("비번입력해");
+			$("#pwd").focus();
+			event.preventDefault();//이벤트막음
+			return;
+		}
+		
+		alert("로그인하러 갑니다.");		
+	 });//submitend
+	 
+	 //reset 클릭
+	 $(":reset").click(function(){
+		 alert("모든 데이터를 초기화 합니다.");
+		 $("#id").focus();
+	 });
+	 
+ });//ready end
+</script>
 
 </head>
 <body>

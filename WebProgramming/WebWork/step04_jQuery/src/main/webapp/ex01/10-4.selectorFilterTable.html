@@ -4,7 +4,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="../js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+	  //alert(1)
+	  //홀수행의 바탕색 설정
+	  //$("table tr:odd").css({backgroundColor: "pink"})
+	  
+	  //짝수행의 바탕색 설정
+	 // $("table tr:even").css({backgroundColor: "yellow"})
+	  
+	  //첫번째 행은 바탕색, 글자색 설정, 글자크기설정
+	  //$("table tr:eq(0)").css({backgroundColor: "green", color:"white", fontSize: "25px"});
+	  
+	  
+	  //$("table tr:odd,table tr:eq(0)").css("color","red") ;// h2 or h3
+	  
+	  $("table tr:nth-child(3)").css("color","red");//1부터
+	  
+	  $("table tr:nth-child(4n)").css("color","blue");//1부터
+  });
 
+</script>
 
 </head>
 <body>

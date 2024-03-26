@@ -4,7 +4,38 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="../js/jquery-3.6.1.min.js"></script>
-
+<script type="text/javascript">
+ $(function(){
+	//alert(1)
+	/*
+	   이벤트등록
+	   1) 정적 element에 이벤트등록(current element)
+	     $().이벤트종류(function(){})
+	   
+	     
+	   2) on() 함수이용- 정적 + 동적 
+	     - 정적
+	     $().on(이벤트종류 , function(){})
+	     
+	     -동적
+	     $(부모노드).on(이벤트종류, 이벤트대상selector ,function(){})
+	     ex)
+	         $(document).on(이벤트종류, 이벤트대상selector ,function(){})
+	   
+	*/
+	 $("#chkAll").on("click", function(){
+		 //jquery에서 checked 속성을 어떻게 변경!!!방법  - prop()
+		 //alert( this.checked )
+		 $(":checkbox").prop("checked", this.checked);
+		 
+		 
+		 this.checked ? $("span").text("전체해지") : $("span").text("전체선택");
+		 
+	 });
+	
+	
+ });//readyEnd
+</script>
 </head>
 
 <body>

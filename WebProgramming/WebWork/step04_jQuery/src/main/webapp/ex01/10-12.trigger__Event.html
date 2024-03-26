@@ -1,22 +1,49 @@
 <!DOCTYPE html >
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Insert title here</title>
-		<style>
-             button { margin: 10px;}
-            
-            div {
-                color: blue;
-                font-weight: bold;
-            }
-            
-            span {
-                color: red;
-            }
-        </style>
-        <script src="../js/jquery-3.6.1.min.js"></script>
-
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Insert title here</title>
+    <style>
+         button { margin: 10px;}
+        
+        div {
+            color: blue;
+            font-weight: bold;
+        }
+        
+        span {
+            color: red;
+        }
+    </style>
+    <script src="../js/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+    	  //$(selector).trigger(이벤트종류) : 특정이벤트를 강제로 호출 
+    	 
+    	  $("button:first").click(function(){
+    		  increment( $("span:first") );
+    		  
+    		  // 다른 이벤트를 강제로 호출
+    		  $("button:last").trigger("click");//button:last 객체의 click이벤트 호출해줘.
+    	      
+    	  });
+    	  
+          $("button:last").click(function(){
+        	  increment( $("span:last") );
+        	  
+    	  });
+          
+        
+          
+          //증가하는함수
+          function increment( spanEle ){
+        	  //alert(spanEle.text())
+        	  let no = parseInt(spanEle.text()) + 1;
+        	  spanEle.text(no);
+          }
+    	  
+      })
+    </script>
 
         
     </head>

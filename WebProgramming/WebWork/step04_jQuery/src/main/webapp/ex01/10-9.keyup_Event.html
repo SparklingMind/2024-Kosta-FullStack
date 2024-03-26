@@ -5,7 +5,35 @@
 <title>Insert title here</title>
 
 <script src="../js/jquery-3.6.1.min.js"></script>
-
+<script type="text/javascript">
+  $(function(){
+	  $("#pwd").keyup(function(){
+		  if($(this).val()==="" && $("#pwdConfirm").val()===""){
+			  $("#lblError")
+			  .text("암호를 입력하시오.")
+			  .css("color","black");
+			  return;//함수빠져나가라.
+		  }
+		  
+		  //div 내용을 지우기
+		  $("#lblError").text("");
+	  });
+	  
+	  $("#pwdConfirm").keyup(function(){
+		  //pwd와 pwdConfirm의 값이 일치여부에 따라 text내용을 다르게 
+		  if($(this).val() === $("#pwd").val()){
+			  $("#lblError")
+			  .html("<b>비번 일치합니다.</b>")
+			  .css("color","blue");
+			  
+		  }else{
+			  $("#lblError")
+			  .html("<b>비번 일치하지않습니다..</b>")
+			  .css("color","red");
+		  }
+	  });
+  });
+</script>
 
 
 </head>

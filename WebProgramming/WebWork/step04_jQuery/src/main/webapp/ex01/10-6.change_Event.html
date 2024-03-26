@@ -3,8 +3,30 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="../js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+ $(document).ready(function(){
+	 //select박스에 change 이벤트 등록
+	 $("[name=job]").change(function(){
+		 //선택된 값을 조회
+		 alert("this.value = "+this.value)
+		 alert("$(this).val() = " + $(this).val() );
+		 
+		 //선택된 index --> selectedIndex ---> javaScript문법
+		 alert("this.selectedIndex = " + this.selectedIndex )
+		 
+		 //선택된 index와 value를 div영역에 추가(이어쓰기)
+		 //ex) 당신의 직업은 ~ 입니다.(선택된 번지)
+		 let str = "당신의 직업은 "+ $(this).val() +"입니다.(선택된 번지수 : "+this.selectedIndex + ")<br>"; 
+		 
+		 $("#result").html( $("#result").html() + str);
+		 
+		 
+	 });
+	 
+ });
 
-
+</script>
 </head>
 <body>
 <h1>change 이벤트</h1>

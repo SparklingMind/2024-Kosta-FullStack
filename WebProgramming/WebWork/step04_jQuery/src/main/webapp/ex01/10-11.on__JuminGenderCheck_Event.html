@@ -5,6 +5,47 @@
 <title>Insert title here</title>
 
 <script src="../js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+ $(function(){
+	 
+	$("#jumin1").on("keyup", function(){
+         // 숫자만 입력가능
+         numberCheck( $(this) )
+         
+         //6자리가 되면 커서를 jumin2로 이동
+         if($(this).val().length ==6)
+            $("#jumin2").focus();  
+	});//keyup 
+	
+	//주민뒷자리 keyup + blur 
+	$("#jumin2")
+	.on("keyup", function(){ 
+		numberCheck($(this));
+		
+	})
+	.on("blur", function(){ 
+		 let ch = $(this).val().charAt(0);
+		 if(ch=="1" || ch=="3") 
+			 $("#man").prop("checked", true);
+		 else
+			 $("#woman").prop("checked", true); 
+	});
+	
+	
+	//숫자유무체크하는 함수
+	function numberCheck( obj ){
+	   console.log( obj.val()  )	
+	   let value = obj.val();
+	   if( isNaN(value) ){
+		   let sliceV = value.substr(0, value.length-1 )
+		   obj.val(sliceV);
+	   }
+	}//numbercheck끝
+	
+ })//readyEnd
+ 
+ 
+</script>
 </head>
 
 <body>

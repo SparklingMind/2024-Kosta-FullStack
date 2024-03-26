@@ -1,11 +1,47 @@
-<!DOCTYPE html >
+1<!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
 <script src="../js/jquery-3.6.1.min.js"></script>
-
+<script type="text/javascript">
+ $(function(){
+	 //클릭등록
+	 $(":button").click(function(){
+		 //선택된 취미, 성별  찾아서  결과를 div 넣기 
+		 //let len = $(":checkbox:checked").length;
+		 
+		 //jquery에서 제공하는 반복문 each
+		 /*
+		    $(selector).each(function(index, item ){   })
+		    
+		    ex) let arr = [1,2,3,4];
+	            $.each(arr , function(index, item){ })
+		 */
+		 
+		 let str="취미 : ";
+		 $(":checkbox:checked").each(function(index , item){
+			// alert(index +" = " + item.value +" , " + this.value +" , " + $(this).val() )
+			str+=item.value+"," ;
+		 });
+		 
+		 //성별
+		 str+="<br>성별 : " +  $(":radio:checked").val();
+		 
+		 //div 넣기
+		 $("div").html(str);
+		 
+		 ///////////////////////////////////
+		// const arr = ["a","b","c","d"];
+		  const arr = [{name:"희정",age:20} ,{name:"나영",age:23} ,{name:"미미",age:21}];
+		 $.each(arr , function(index, item){
+			 console.log(index + "  = " + item.name +" , " + item.age)
+		 });
+		
+	 });
+ })//
+</script>
 </head>
 
 <body>

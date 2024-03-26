@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style>
+	img{width:50px;height:40px}
+</style>
+ <script src="../js/jquery-3.6.1.min.js"></script>
+ <script type="text/javascript">
+   $(function(){
+	   //h3에 바탕색 
+	   //$("h3").css("backgroundColor","blue")
+	   let bgColor = ["red","green","blue","pink"];
+	   
+	   $("h3").each(function(index, item){
+		    //item.style.backgroundColor = bgColor[index];
+		    
+		    $(this).css("backgroundColor", bgColor[index]);
+	   });
+	   
+	   
+	   let img ="<img src='img/jquery.jpg' alt='이미지입니다.'>";
+	   
+	   $("#pre").click(function(){
+		   $(".a").prepend(img);//하위요소 앞에 추가
+	   });
+	   
+	   $("#app").click(function(){
+		   $(".b").append(img); //하위요소로 뒤에 추가
+	   });
+	   
+       $("#before").click(function(){
+    	   $(".c").before(img); //형제노드로 앞에 추가
+       });
+
+      $("#after").click(function(){
+    	  $(".d").after(img);//형제노드로 뒤에 추가
+      });
+   })
+ </script>
+
+</head>
+<body>
+  <h1>DOM조작 - ADD </h1>
+	<input type="button" id="pre" value="prepend"/>
+	<input type="button" id="app" value="append"/>
+	
+    <input type="button" id="before" value="before"/>
+	<input type="button" id="after" value="after"/>
+	
+	<h3 class="a">prepend 영역</h3>
+	<h3 class="b">append 영역</h3>
+	
+	<h3 class="c">before 영역</h3>
+	<h3 class="d">after 영역</h3>
+</body>
+</html>
