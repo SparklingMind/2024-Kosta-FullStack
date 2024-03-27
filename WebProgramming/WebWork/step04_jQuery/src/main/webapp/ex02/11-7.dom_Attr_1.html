@@ -3,15 +3,62 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
- <style type="text/css">
-   /*img{width: 100px; height: 100px}*/
- </style>
- <script src="../js/jquery-3.6.1.min.js"></script>
+<style type="text/css">
+/* 	img{width: 100px; height: 100px} */
+</style>
+<script src="../js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		/* $().on("mouserover", function(){	//- 이벤트 동시 등록 방식 1
+			
+		}).on("mouseout",function(){
+			
+		}); */
+
+		$("img").on(
+				{
+					mouseover : function() { // - 이벤트 동시 등록 방식 2
+
+						let currImgSrc = $(this).attr("src");
+						let currW = $(this).attr("width"); //html의 속성
+						let currH = $(this).attr("height");
+
+						let currSW = $(this).css("width"); //css의 스타일(html의 속성과 구분)
+						let currSH = $(this).css("height");
+
+						console.log("src = " + currImgSrc + ", width = "
+								+ currW + ", height = " + currH
+								+ ", css width = " + currSW + ", css height = "
+								+ currSH);
+
+						//속성 변경하려면? (src, width, height)
+						//$(this).attr("src","img/star.png").attr().attr() - 방식 1
+						$(this).attr({ //방식 2
+							src : "img/star.png",
+							width : currW * 2,
+							height : currH * 2
+						})
+					},
+					mouseout : function() {
+						$(this).attr("src", function(index, currV) {
+							console.log(index + " = " + currV);
+							return "img/heart.png";
+						}).attr("width", function(index, currV) {
+							console.log(index + " = " + currV);
+							return currV / 2;
+						}).attr("height", function(index, currV) {
+							console.log(index + " = " + currV);
+							return currV / 2;
+						});
+					}
+				});
+	})
+</script>
 
 </head>
 <body>
-<h1>Dom요소 속성 추가 </h1>
-<img src="img/heart.png" id="img"  width="50" height="50"/>
+	<h1>Dom요소 속성 추가</h1>
+	<img src="img/heart.png" id="img" width="50" height="50" />
 
 </body>
 </html>

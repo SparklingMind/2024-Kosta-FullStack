@@ -1,0 +1,46 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style>
+	a{text-decoration:none}
+</style>
+ <script src="../js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#show").click(function(){
+			$("img").show(2000,function(){
+				$(this).css("border","1px solid red");
+				$(this).attr("src","img/jquery.jpg");
+			});	//전체가 보여지는 시간(속도)과 보인 후 해야할 함수를 선언할 수 있다.
+		});
+		$("#hide").click(function () {
+			$("img").hide(5000, function(){
+				$(this).attr("src","img/jpup_id.jpg");
+			});	
+		});
+		$("#toggle").click(function () {	//show와 hide를 한 번에 처리할 수 있다.
+			$("img").toggle();
+		});
+		
+	})
+
+</script>
+</head>
+<body>
+<div style="text-align: center;">
+<h1>Basic 효과 </h1>
+	<a href="#" id="show">show</a>&nbsp;&nbsp;&nbsp;
+	<a href="#" id="hide">hide</a>&nbsp;&nbsp;&nbsp;
+	<a href="#" id="toggle">toggle</a>
+	
+	<hr/>
+	<img src="img/jpup_id.jpg"/>
+</div>
+</body>
+
+
+
+
+</html>

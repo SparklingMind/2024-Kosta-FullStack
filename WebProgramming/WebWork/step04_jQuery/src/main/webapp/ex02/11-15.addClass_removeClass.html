@@ -4,10 +4,29 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-	.h1Css{background-color:yellow;border:1px solid red; color:blue}
+	.h1Css{background-color:#EEEEFF;border:1px solid #8E7DBE; color:#494947}
 </style>
 <script src="../js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("h1").hover(
+			function(){
+				$(this).addClass("h1Css");	//이미 클래스이름을 인자로 받는 함수이므로 ".h1Css"와 같이 .추가하지 않는다.
+			},
+			function(){
+				$(this).removeClass("h1Css");
+			}
+		);
+		
+		
+		//mouseover과 mouseout을 동시에 처리할 수 있다.
+		//$().mouseover.mouseout()
+		//on({mouseover : mouseout: })
+		
+		
+	})
 
+</script>
 </head>
 <body>
 <h1>

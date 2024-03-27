@@ -1,0 +1,39 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style>
+	#prev, #mainPage, #next{float:left}
+    #mainPage{width:100px; overflow: hidden; }
+    
+	#page{width:500px}
+	
+	img{ width:100px ; height:100px;}
+	
+	a{text-decoration:none ; }
+</style>
+
+
+
+<script src="../js/jquery-3.6.1.min.js"></script>
+
+</head>
+<body>
+
+<h1>animate 효과</h1>
+   <div id="allPage">
+	 <a href="#" id="prev">이전&nbsp;&nbsp;&nbsp;</a>
+	<div id="mainPage"> <!-- width : 100px; overflow:hidden -->
+		<div id="page"><!-- width : 500px -->
+		<!--marginLeft 이용하기-->
+		 <img src="img/a.jpg"/><img src="img/b.jpg"/><img src="img/c.jpg"/><img src="img/d.jpg"/><img src="img/e.jpg"/>
+	    </div>
+	</div>
+	<a href="#" id="next">&nbsp;&nbsp;&nbsp;다음</a>
+  </div>
+</body>
+
+
+
+</html>
