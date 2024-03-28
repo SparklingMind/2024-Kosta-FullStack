@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+ div{width:300px; height:100px ; border: 1px red solid;}
+</style>
+<script type="text/javascript" src="../js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+ $(function(){
+	 $("#btnSave").click(function(){
+		 let name = $("#s_key").val();
+		 let value = $("#s_value").val();
+		 if(name==="" || value===""){
+			 alert("name 과 value를 입력하세요.");
+			 return ;//함수빠져나가라.
+		 }
+		 
+		 //localStorage에 저장하자.
+		 localStorage.setItem(name, value);
+		 
+		 $("#s_key").val("");
+		 $("#s_value").val("");
+		 $("#s_key").focus();
+		 
+		 //저장된 정보 조회하기 
+		 getInfo();
+		 
+	 });//clickEnd
+	 
+	 //정보 가져오기
+	 function getInfo(){
+		  let str="저장된 개수 : ";
+		  //저장된 name 조회
+		  let len = localStorage.length;
+		  str+=len+"<br>";
+		  
+		  for(let i=0; i < len ;i++){
+			  let name = localStorage.key(i);
+			  let value = localStorage.getItem(name);
+			  str+= name +" : " + value +"<br>";
+		  }
+		  
+		 
+		 $("#result").html(str);
+	 }
+	 
+	 getInfo();
+	 
+	 ////////////////////////////////////////
+	 $("#btnClear").click(function(){
+		 let name = prompt("삭제하실 key는?");
+		 localStorage.removeItem(name);
+		 getInfo();
+	 });
+ })
+</script>
+
+</head>
+<body>
+<h1> localStorage Test  - 유효기간이 없어 삭제되기전까지 유지</h1>
+<form>
+  key : <input type="text" name="s_key" id="s_key"/>
+  value : <input type="text" name="s_value" id="s_value"/>
+  
+ <input type="button"  value="저장하기"  id="btnSave"/>
+ <button type="button" id="btnClear">정보 지우기 </button>
+ <hr>
+ <div id="result"></div>
+</form>
+
+<a href="ex02_localResult.html">localStorage 확인하러가자</a>
+
+</body>
+</html>
+
+
+
+
+
+

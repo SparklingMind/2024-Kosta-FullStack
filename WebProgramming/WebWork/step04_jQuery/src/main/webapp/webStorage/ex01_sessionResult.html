@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript" src="../js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+ $(function(){
+	//정보 가져오기
+	 function getInfo(){
+		  let str="저장된 개수 : ";
+		  //저장된 name 조회
+		  let len = sessionStorage.length;
+		  str+=len+"<br>";
+		  
+		  for(let i=0; i < len ;i++){
+			  let name = sessionStorage.key(i);
+			  let value = sessionStorage.getItem(name);
+			  str+= name +" : " + value +"<br>";
+		  }
+		  
+		 
+		 $("#result").html(str);
+	 }
+	 
+	 getInfo();
+ })//readyEnd
+</script>
+</head>
+<body>
+<h1>sessionStorage 정보 확인</h1>
+<div id="result"></div>
+</body>
+</html>

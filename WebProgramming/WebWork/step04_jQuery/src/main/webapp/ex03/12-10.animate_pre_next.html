@@ -4,34 +4,102 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-	#prev, #mainPage, #next{float:left}
-    #mainPage{width:100px; overflow: hidden; }
-    
-	#page{width:500px}
-	
-	img{ width:100px ; height:100px;}
-	
-	a{text-decoration:none ; }
+#prev, #mainPage, #next {
+	float: left;
+}
+#allPage{
+	height : 100px;
+	}
+#mainPage {
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+}
+
+#page {
+	width: 500px;
+	height: 100px;
+}
+
+img {
+	width: 100px;
+	height: 100px;
+}
+
+a {
+	text-decoration: none;
+}
+
+#indicator{
+	color : blue;
+	font-weight: bold;
+}
+
+.disabled {
+	color: #ccc;
+	pointer-events: none;
+} /* 비활성화 스타일 추가 */
+
 </style>
 
 
 
 <script src="../js/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#prev").on("click", function() {
+			$("#page").animate({
+				marginLeft : "+=100px"
+			}, 500, updateIndicator)
+		});
 
+		$("#next").on("click", function() {
+			$("#page").animate({
+				marginLeft : "-=100px"
+			}, 500, updateIndicator)
+		});
+
+		function updateIndicator() {
+			var currentMargin = parseInt($("#page").css('marginLeft'));
+			if (currentMargin >= 0) {
+				$("#indicator").text("첫번째 이미지");
+				$("#prev").addClass('disabled'); //이전 버튼 비활성화
+			} else if (currentMargin <= -400) {
+				$("#indicator").text("마지막 이미지");
+				$("#next").addClass('disabled'); //다음 버튼 비활성화
+			} else {
+				$("#indicator").text("");
+				$("#prev, #next").removeClass('disabled');
+			}
+		}
+		
+		updateIndicator();
+	});
+</script>
 </head>
 <body>
 
-<h1>animate 효과</h1>
-   <div id="allPage">
-	 <a href="#" id="prev">이전&nbsp;&nbsp;&nbsp;</a>
-	<div id="mainPage"> <!-- width : 100px; overflow:hidden -->
-		<div id="page"><!-- width : 500px -->
-		<!--marginLeft 이용하기-->
-		 <img src="img/a.jpg"/><img src="img/b.jpg"/><img src="img/c.jpg"/><img src="img/d.jpg"/><img src="img/e.jpg"/>
-	    </div>
+	<h1>animate 효과</h1>
+	<div id="allPage">
+		<a href="#" id="prev">이전&nbsp;&nbsp;&nbsp;</a>
+		<div id="mainPage">
+			<!-- width : 100px; overflow:hidden -->
+			<div id="page">
+				<!-- width : 500px -->
+				<!--marginLeft 이용하기-->
+				<img src="img/a.jpg" /><img src="img/b.jpg" /><img src="img/c.jpg" /><img
+					src="img/d.jpg" /><img src="img/e.jpg" />
+			</div>
+
+		</div>
+		<a href="#" id="next">&nbsp;&nbsp;&nbsp;다음</a>
+
+
 	</div>
-	<a href="#" id="next">&nbsp;&nbsp;&nbsp;다음</a>
-  </div>
+	<br>
+	<div id="indicator" />
+	<!-- 첫 번째 이미지와 마지막 이미지에서 경고 표시 -->
+
 </body>
 
 
